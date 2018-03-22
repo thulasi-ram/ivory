@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+{% get_providers as socialaccount_providers %}
+
+
+<div class="ui three column centered grid">
+
+    <div class="row">
+        <div class="column"></div>
+        <div class="column">
+            <div class="center content">
+                <h1 class="center">{% trans "Login" %}</h1>
+
+                <form class="ui small form" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                    <div class="field">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <a class="ui button labeled icon right floated" href="{% url 'account_reset_password' %}">
+                        {% trans "Forgot Password?"%}
+                        <i class="right arrow icon"></i>
+
+                    </a>
+                    <button class="ui primary button" type="submit">{% trans "Sign In" %}</button>
+                </form>
+            </div>
+            <div class="ui horizontal divider"> or</div>
+            {% if socialaccount_providers %}
+
+                <ul class="ui list">
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+            {% else %}
+            <p>{% blocktrans %}If you have not created an account yet, then please
+                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+            {% endif %}
+        </div>
+        <div class="column"></div>
+    </div>
+</div>
+
+{% endblock %}
