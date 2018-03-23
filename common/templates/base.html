@@ -6,18 +6,19 @@
     {% load i18n %}
     {% load static %}
     {% load static %}
-    {% block styles %}
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"/>
+    {% block styles %}
     {% endblock %}
 </head>
 <body>
-
-<div class="ui large menu">
+<div class="pusher">
+<div class="ui massive menu">
     <a href="#" class="header item">
-        <!--<img class="logo" src="assets/images/logo.png">-->
+        <i class="large lira sign icon"></i>
         Ivory
     </a>
-    <a href="#" class="item">Home</a>
+    <a href="#" class="item">home</a>
     <div class="right menu">
         <div class="item">
             <div class="ui icon input">
@@ -35,9 +36,11 @@
         </div>
     </div>
 </div>
-
+</div>
+{% block top_divider %} <div class="ui hidden divider"></div> {% endblock %}
 {% block content %}{% endblock %}
-<!--<div class="ui segment"></div>-->
+<div class="ui basic segment"></div>
+<div class="ui divider"></div>
 <div class="ui vertical footer padded segment">
     <div class="ui center aligned container">
       <div class="ui stackable divided grid">
@@ -74,8 +77,11 @@
         </div>
       </div>
       <div class="ui section divider"></div>
-      <img src="assets/images/logo.png" class="ui centered mini image">
-      <div class="ui horizontal small divided link list">
+        <div class="ui icon centered mini">
+                  <i class="grey lira sign icon"></i>
+
+        </div>
+        <div class="ui horizontal small divided link list">
         <a class="item" href="#">Site Map</a>
         <a class="item" href="#">Contact Us</a>
         <a class="item" href="#">Terms and Conditions</a>

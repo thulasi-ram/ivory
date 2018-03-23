@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Ivory Clients{% endblock %}
+{% block styles %}
+<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+
+
+<div class="ui grid container">
+    <div class="four wide column">
+        <div class="ui vertical large menu">
+            <div class="item">
+                <div class="ui input"><input type="text" placeholder="Search..."></div>
+            </div>
+            <a class="item">
+                <i class="grid layout icon"></i> Client Management
+            </a>
+            <a class="item">
+                <i class="grid layout icon"></i> Lead Management
+            </a>
+        </div>
+    </div>
+    <div class="twelve wide column">
+        <h2 class="ui header">
+            <i class="plug icon"></i>
+            <div class="content">
+                Client Management
+            </div>
+        </h2>
+        <div class="ui basic segment"></div>
+        <div class="ui three stackable cards">
+            <div class="fluid card">
+                <div class="content">
+                    <div class="header">
+                        Add a client account
+                    </div>
+                    <div class="description">
+                        Add client accounts
+                    </div>
+                </div>
+                <div class="ui bottom attached button">
+                    <i class="add icon"></i>
+                    Add Client account
+                </div>
+            </div>
+
+            <div class="fluid card">
+                <div class="content">
+                    <div class="header">
+                        Add a legal entity
+                    </div>
+                    <div class="description">
+                        Add legal entities to manage your client accounts
+                    </div>
+                </div>
+                <div class="ui bottom attached button">
+                    <i class="add icon"></i>
+                    Add Legal entity
+                </div>
+            </div>
+
+            <div class="fluid card">
+                <div class="content">
+                    <div class="header">
+                        Add a contact
+                    </div>
+                    <div class="description">
+                        Add contact
+                    </div>
+                </div>
+                <div class="ui bottom attached button">
+                    <i class="add icon"></i>
+                    Add Contact
+                </div>
+            </div>
+        </div>
+
+        <div class="ui basic segment"></div>
+        <div id="clients_tab">
+            <div class="ui pointing secondary menu">
+                <a class="item" data-tab="clients_table">Client Accounts</a>
+                <a class="item" data-tab="contacts_table">Contacs</a>
+                <a class="item" data-tab="legal_table">Legal Entities</a>
+            </div>
+            <div class="ui tab segment" data-tab="clients_table">
+                <table id="clients_table" class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ui tab segment" data-tab="contacts_table">
+                <table id="contacts_table" class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ui tab segment" data-tab="legal_table">
+                <table id="legal_table" class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+<script>
+$(document).ready(function() {
+    function clients_table() {
+        if ($.fn.dataTable.isDataTable("#clients_table")){
+        return;
+        }
+        $('#clients_table').DataTable({
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search..."
+            },
+            ajax: {
+                url: "http://127.0.0.1:8000/clients/list",
+                dataSrc: ""
+            },
+            columns: [{
+                    "data": "username"
+                },
+                {
+                    "data": "first_name"
+                },
+                {
+                    "data": "email"
+                }
+            ]
+        });
+        $(".dataTables_filter label").addClass("ui input");
+
+    }
+
+    function contacts_table() {
+        if ($.fn.dataTable.isDataTable("#contacts_table")){
+        return;
+        }
+        $('#contacts_table').DataTable({
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search..."
+            },
+            ajax: {
+                url: "http://127.0.0.1:8000/clients/list",
+                dataSrc: ""
+            },
+            columns: [{
+                    "data": "username"
+                },
+                {
+                    "data": "first_name"
+                },
+                {
+                    "data": "email"
+                }
+            ]
+        });
+        $(".dataTables_filter label").addClass("ui input");
+
+    }
+
+    function legal_table() {
+        if ($.fn.dataTable.isDataTable("#legal_table")){
+        return;
+        }
+        $('#legal_table').DataTable({
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search..."
+            },
+            ajax: {
+                url: "http://127.0.0.1:8000/clients/list",
+                dataSrc: ""
+            },
+            columns: [{
+                    "data": "username"
+                },
+                {
+                    "data": "first_name"
+                },
+                {
+                    "data": "email"
+                }
+            ]
+        });
+        $(".dataTables_filter label").addClass("ui input");
+
+    }
+
+    function tab_load(tab_name) {
+    if (tab_name == 'clients_table'){
+    clients_table()
+    }
+    else if (tab_name == 'contacts_table'){
+    contacts_table()
+    }
+    else if (tab_name == 'legal_table'){
+    legal_table()
+    }
+
+
+    }
+
+      $('.menu .item').tab({'onFirstLoad':tab_load});
+    $('.menu .item').tab('change tab', 'clients_table');
+});
+
+
+
+
+
+
+</script>
+{% endblock %}

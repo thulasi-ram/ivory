@@ -1,13 +1,13 @@
 # Create your views here.
 from rest_framework import status
-from rest_framework.renderers import BrowsableAPIRenderer, TemplateHTMLRenderer
+from rest_framework.renderers import BrowsableAPIRenderer, TemplateHTMLRenderer, JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
 class BaseAPI(APIView):
     template_name = None
-    renderer_classes = (BrowsableAPIRenderer,)
+    renderer_classes = (JSONRenderer, BrowsableAPIRenderer,)
     authentication_classes = ()
     permission_classes = ()
 
