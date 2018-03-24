@@ -39,7 +39,7 @@
                         Add client accounts
                     </div>
                 </div>
-                <div class="ui bottom attached button">
+                <div id="add_client_button" class="ui bottom attached button">
                     <i class="add icon"></i>
                     Add Client account
                 </div>
@@ -54,7 +54,7 @@
                         Add legal entities to manage your client accounts
                     </div>
                 </div>
-                <div class="ui bottom attached button">
+                <div id="add_legal_entity_button" class="ui bottom attached button">
                     <i class="add icon"></i>
                     Add Legal entity
                 </div>
@@ -69,7 +69,7 @@
                         Add contact
                     </div>
                 </div>
-                <div class="ui bottom attached button">
+                <div id="add_contact_button" class="ui bottom attached button">
                     <i class="add icon"></i>
                     Add Contact
                 </div>
@@ -142,6 +142,32 @@
         </div>
     </div>
 </div>
+
+
+<!--############################# MODALS #################################-->
+<div id="add_client_modal" class="ui modal">
+    <div class="header">Add client</div>
+    <div class="scrolling content">
+        <p>Very long content goes here</p>
+    </div>
+</div>
+
+<div id="add_contact_modal" class="ui modal">
+    <div class="header">Add contact</div>
+    <div class="scrolling content">
+        <p>Very long content goes here</p>
+    </div>
+</div>
+
+
+<div id="add_legal_entity_modal" class="ui modal">
+    <div class="header">Add legal entity</div>
+    <div class="scrolling content">
+        <p>Very long content goes here</p>
+    </div>
+</div>
+
+
 {% endblock %}
 {% block scripts %}
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
@@ -248,10 +274,18 @@ $(document).ready(function() {
 
       $('.menu .item').tab({'onFirstLoad':tab_load});
     $('.menu .item').tab('change tab', 'clients_table');
+
+    $('#add_client_button').click(function(e) {
+        $('#add_client_modal.ui.modal').modal('show');
+    });
+
+    $('#add_contact_button').click(function(e) {
+        $('#add_contact_modal.ui.modal').modal('show');
+    });
+        $('#add_legal_entity_button').click(function(e) {
+        $('#add_legal_entity_modal.ui.modal').modal('show');
+    });
 });
-
-
-
 
 
 
