@@ -7,7 +7,7 @@ from common.views import BaseAPI
 
 
 
-class LegalEntities(BaseAPI):
+class LegalEntitiesView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
         data = [

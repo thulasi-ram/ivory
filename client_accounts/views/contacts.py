@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from common.views import BaseAPI
 
 
-class Contacts(BaseAPI):
+class ContactsView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
         data = [
