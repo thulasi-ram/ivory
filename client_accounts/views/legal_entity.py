@@ -1,33 +1,22 @@
 # Create your views here.
-from marshmallow import Schema, fields
+
 from rest_framework import status
 from rest_framework.response import Response
 
+from client_accounts.models import LegalEntity
+from client_accounts.schemas import LegalEntitySchema
 from common.views import BaseAPI
-
-
-class UserSchema(Schema):
-    name = fields.String()
-    email = fields.Email()
-    created_at = fields.DateTime()
-
-
-class LegalEntitySchema(Schema):
-    name = fields.Str()
-    business_type = fields.Str()
-    gstin = fields.Str()
-    company_email = fields.Email()
-    company_phone = fields.Str()
-    notes = fields.Str()
-    created_by = fields.Nested(UserSchema)
 
 
 class LegalEntityView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        legal_entity = request.data.get('legal_entity')
-        LegalEntity.objects.get()
-        return Response(data={'request': request}, status=status.HTTP_200_OK)
+        legal_entity_uid = request.data.get('legal_entity')
+        legal_entity = LegalEntity.objects.get(uid=legal_entity_uid)
+        legal_entity_schema = LegalEntitySchema().dump(legal_entity)
+        return Response(data=legal_entity_schema, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
+        legal_entity_schema = LegalEntitySchema().load(request.data)
+        LegalEntity.objects.create(**legal_entity_schema)
         return Response(data={'request': request}, status=status.HTTP_201_CREATED)

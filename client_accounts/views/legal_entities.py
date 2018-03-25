@@ -2,33 +2,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 
+from client_accounts.models import LegalEntity
+from client_accounts.schemas import LegalEntitySchema
 from common.views import BaseAPI
-
-
 
 
 class LegalEntitiesView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        data = [
-            {
-                "url": "http://127.0.0.1:3434/user/2/",
-                "username": "morgoth",
-                "first_name": "morgoth",
-                "email": "duke.valafar@gmail.com",
-                "is_staff": True
-            }, {
-                "url": "http://127.0.0.1:3434/user/3/",
-                "username": "anna",
-                "first_name": "",
-                "email": "anna@anna.com",
-                "is_staff": True
-            }, {
-                "url": "http://127.0.0.1:3434/user/4/",
-                "username": "adam",
-                "first_name": "",
-                "email": "ada@abc.com",
-                "is_staff": False
-            }
-        ]
-        return Response(data=data, status=status.HTTP_200_OK)
+        legal_entities = LegalEntity.objects.all()
+        schema = LegalEntitySchema(many=True)
+        return Response(data=schema.dumps(legal_entities), status=status.HTTP_200_OK)

@@ -16,6 +16,10 @@ class LegalEntity(TimeStampedModel):
     created_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL)
     notes = models.TextField()
 
+    class Meta:
+        verbose_name = 'Legal Entity'
+        verbose_name_plural = 'Legal Entities'
+
     def save(self, *args, **kwargs):
         if self.uid is None:
             self.uid = make_meanigful_id(self.name, length=10)
