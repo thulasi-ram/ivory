@@ -115,13 +115,17 @@
                 <table id="legal_table" class="ui celled table">
                     <thead>
                     <tr>
-                        <th>User Name</th>
-                        <th>First Name</th>
+                        <th>UID</th>
+                        <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -235,13 +239,21 @@ $(document).ready(function() {
                 dataSrc: ""
             },
             columns: [{
-                    "data": "username"
+                    "data": "uid"
                 },
                 {
-                    "data": "first_name"
+                    "data": "legal_name"
                 },
                 {
-                    "data": "email"
+                    "data": "company_email"
+                },
+                {
+                    "data": "company_phone"
+                },
+                {
+                   "data": "admin_change_url",
+                    "render": function ( data, type, full, meta ) {
+                                return '<a href="'+data+'"><i class="edit icon"></i></a>';}
                 }
             ]
         });
@@ -267,14 +279,17 @@ $(document).ready(function() {
     $('.menu .item').tab('change tab', 'clients_table');
 
     $('#add_client_button').click(function(e) {
-        $('#add_client_modal.ui.modal').modal('show');
+        window.open('{% url 'admin:client_accounts_clientaccount_add' %}', '_blank');
+        <!--$('#add_client_modal.ui.modal').modal('show');-->
     });
 
     $('#add_contact_button').click(function(e) {
-        $('#add_contact_modal.ui.modal').modal('show');
+        window.open('{% url 'admin:client_accounts_contact_add' %}', '_blank');
+        <!--$('#add_contact_modal.ui.modal').modal('show');-->
     });
         $('#add_legal_entity_button').click(function(e) {
-        $('#add_legal_entity_modal.ui.modal').modal('show');
+        window.open('{% url 'admin:client_accounts_legalentity_add' %}', '_blank');
+        <!--$('#add_legal_entity_modal.ui.modal').modal('show');-->
     });
 });
 

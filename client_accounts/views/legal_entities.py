@@ -11,5 +11,5 @@ class LegalEntitiesView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
         legal_entities = LegalEntity.objects.all()
-        schema = LegalEntitySchema(many=True)
-        return Response(data=schema.dumps(legal_entities), status=status.HTTP_200_OK)
+        schema = LegalEntitySchema(many=True, strict=True)
+        return Response(data=schema.dump(legal_entities).data, status=status.HTTP_200_OK)

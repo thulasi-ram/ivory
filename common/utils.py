@@ -6,7 +6,7 @@ from django.utils.crypto import get_random_string
 
 
 def cheap_hash(string, length=6):
-    _digest = hashlib.sha256(string).hexdigest()
+    _digest = hashlib.sha256(string.encode('utf-8')).hexdigest()
     if length > len(_digest):
         rand_str = get_random_string(length=length - len(_digest))
         _digest = '{d}{r}'.format(d=_digest, r=rand_str)
