@@ -6,7 +6,7 @@ from common.models import Address
 from common.utils import make_meanigful_id
 
 
-class LegalAccount(TimeStampedModel):
+class LegalEntity(TimeStampedModel):
     uid = models.CharField(max_length=20)
     name = models.CharField(max_length=500)
     business_type = models.CharField(max_length=500)
@@ -24,14 +24,14 @@ class LegalAccount(TimeStampedModel):
 
 class LegalAccountAddresses(TimeStampedModel):
     address = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
-    legal_account = models.ForeignKey(LegalAccount, null=True, on_delete=models.CASCADE)
+    legal_account = models.ForeignKey(LegalEntity, null=True, on_delete=models.CASCADE)
     address_type = models.CharField(max_length=20, blank=True, default='')
 
 
 class ClientAccount(TimeStampedModel):
     uid = models.CharField(max_length=20)
     name = models.CharField(max_length=500)
-    legal_account = models.ForeignKey(LegalAccount, null=True, on_delete=models.SET_NULL)
+    legal_account = models.ForeignKey(LegalEntity, null=True, on_delete=models.SET_NULL)
     handled_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='handled_by')
     created_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='created_by')
     notes = models.TextField()

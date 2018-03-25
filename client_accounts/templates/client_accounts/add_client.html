@@ -1,0 +1,17 @@
+{% block content %}
+
+<div class="four wide column">
+    <div class="ui vertical large menu">
+        <div class="item">
+            <div class="ui input"><input type="text" placeholder="Search..."></div>
+        </div>
+        <a class="item" href="{% url 'client_accounts:landing' %}">
+            <i class="grid layout icon"></i> Client Management
+        </a>
+        <a class="item" href="">
+            <i class="grid layout icon"></i> Lead Management
+        </a>
+    </div>
+</div>
+
+{% endblock %}

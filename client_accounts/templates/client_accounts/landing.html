@@ -8,19 +8,9 @@
 
 
 <div class="ui grid container">
-    <div class="four wide column">
-        <div class="ui vertical large menu">
-            <div class="item">
-                <div class="ui input"><input type="text" placeholder="Search..."></div>
-            </div>
-            <a class="item">
-                <i class="grid layout icon"></i> Client Management
-            </a>
-            <a class="item">
-                <i class="grid layout icon"></i> Lead Management
-            </a>
-        </div>
-    </div>
+
+    {% include "client_accounts/sidebar.html" %}
+
     <div class="twelve wide column">
         <h2 class="ui header">
             <i class="plug icon"></i>
@@ -145,6 +135,7 @@
 
 
 <!--############################# MODALS #################################-->
+
 <div id="add_client_modal" class="ui modal">
     <div class="header">Add client</div>
     <div class="scrolling content">
@@ -184,7 +175,7 @@ $(document).ready(function() {
                 searchPlaceholder: "Search..."
             },
             ajax: {
-                url: "http://127.0.0.1:8000/clients/list",
+                url: "{% url 'client_accounts:clients' %}",
                 dataSrc: ""
             },
             columns: [{
@@ -212,7 +203,7 @@ $(document).ready(function() {
                 searchPlaceholder: "Search..."
             },
             ajax: {
-                url: "http://127.0.0.1:8000/clients/list",
+                url: "{% url 'client_accounts:contacts' %}",
                 dataSrc: ""
             },
             columns: [{
@@ -240,7 +231,7 @@ $(document).ready(function() {
                 searchPlaceholder: "Search..."
             },
             ajax: {
-                url: "http://127.0.0.1:8000/clients/list",
+                url: "{% url 'client_accounts:legal_entities' %}",
                 dataSrc: ""
             },
             columns: [{
