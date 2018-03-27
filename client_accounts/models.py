@@ -43,9 +43,9 @@ class ClientAccount(TimeStampedModel):
     uid = models.CharField(max_length=20, editable=False)
     name = models.CharField(max_length=500)
     legal_account = models.ForeignKey(LegalEntity, null=True, on_delete=models.SET_NULL)
-    handled_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='handled_by',
+    handled_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='account_handled_by',
                                    default=get_current_user)
-    created_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='created_by',
+    created_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='account_created_by',
                                    default=get_current_user, editable=False)
     notes = models.TextField()
 

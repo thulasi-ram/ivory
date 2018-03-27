@@ -11,4 +11,7 @@ class CurrentUserMiddleware(MiddlewareMixin):
 
 
 def get_current_user():
-    return _user.value
+    try:
+        return _user.value
+    except AttributeError:
+        return None
