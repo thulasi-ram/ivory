@@ -6,14 +6,14 @@
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/jkanban.min.css' %}">
 <style>
-body {
-    background-color: linen;
+#kanban {
+ overflow-x: auto;
+ padding: 20px 0;
 }
 
-h1 {
-    color: maroon;
-    margin-left: 40px;
-}
+
+
+
 </style>
 {% endblock %}
 
@@ -22,20 +22,27 @@ h1 {
 
 
 <div class="ui grid container">
-    <div class="ui three column grid">
-        <h2 class="ui header">
-            <i class="plug icon"></i>
-            <div class="content">
-                Lead Management
-            </div>
-        </h2>
-        <div class="ui basic segment">
-            <div id="log"></div>
+    <div class="sixteen wide column">
+        <div class="ui clearing basic segment">
+            <h2 class="ui left floated header">
+                <div class="content">
+                    <i class="handshake icon"></i>
+
+                    Lead Management
+
+                </div>
+
+            </h2>
+            <a class="ui right floated primary button">Add lead</a>
         </div>
-        <div id="rightArrow"></div>
-        <div id='scrollContainer' class="ui grid scrolling content" style="overflow-y:auto;padding-bottom:100px;">
-        <div id="myKanban"></div>
-            <div id="leftArrow"></div>
+        <div class="ui pointing secondary menu">
+            <a class="item active" data-tab="current_leads">Current Leads</a>
+            <a class="item" data-tab="closed_leads">Closed</a>
+        </div>
+        <div class="ui tab active" data-tab="current_leads">
+            <div id="kanban"></div>
+        </div>
+        <div class="ui tab" data-tab="closed_leads">
         </div>
     </div>
 
@@ -47,104 +54,66 @@ h1 {
 <script>
 $(document).ready(function() {
  var KanbanTest = new jKanban({
-        element: '#myKanban',
+        element: '#kanban',
         gutter: '10px',
-        widthBoard: '450px',
+        dragBoards: false,
+        widthBoard: '300px',
         click: function (el) {
             console.log("Trigger on all items click!");
         },
-        buttonClick: function (el, boardId) {
-            console.log(el);
-            console.log(boardId);
-            // create a form to enter element
-            var formItem = document.createElement('form');
-            formItem.setAttribute("class", "itemform");
-            formItem.innerHTML = '<div class="form-group"><textarea class="form-control" rows="2" autofocus></textarea></div><div class="form-group"><button type="submit" class="btn btn-primary btn-xs pull-right">Submit</button><button type="button" id="CancelBtn" class="btn btn-default btn-xs pull-right">Cancel</button></div>'
-            KanbanTest.addForm(boardId, formItem);
-            formItem.addEventListener("submit", function (e) {
-                e.preventDefault();
-                var text = e.target[0].value
-                KanbanTest.addElement(boardId, {
-                    "title": text,
-                })
-                formItem.parentNode.removeChild(formItem);
-            });
-            document.getElementById('CancelBtn').onclick = function () {
-                formItem.parentNode.removeChild(formItem)
-            }
+        dropEl: function (el) {
+            console.log("Drop on all items drop!");
         },
         addItemButton: false,
         boards: [
             {
-                "id": "_todo",
-                "title": "To Do (Can drop item only in working)",
-                "class": "info,good",
-                "dragTo": ['_working'],
-                "item": [
-                    {
-                        "id": "_test_delete",
-                        "title": "Try drag this (Look the console)",
-                        "drag": function (el, source) {
-                            console.log("START DRAG: " + el.dataset.eid);
-                        },
-                        "dragend": function (el) {
-                            console.log("END DRAG: " + el.dataset.eid);
-                        },
-                        "drop": function(el){
-                            console.log('DROPPED: ' + el.dataset.eid )
-                        }
-                    },
-                    {
-                        "title": "Try Click This!",
-                        "click": function (el) {
-                            alert("click");
-                        },
-                    }
-                ]
+                "id": "_identify",
+                "title": "Identify",
+                "item": []
             },
             {
-                "id": "_working",
-                "title": "Working (Try drag me too)",
-                "class": "warning",
-                "item": [
-                    {
-                        "title": "Do Something!",
-                    },
-                    {
-                        "title": "Run?",
-                    }
-                ]
+                "id": "_call",
+                "title": "Call",
+                "item": []
             },
             {
-                "id": "_done",
-                "title": "Done (Can drop item only in working)",
-                "class": "success",
-                "dragTo": ['_working'],
-                "item": [
-                    {
-                        "title": "All right",
-                    },
-                    {
-                        "title": "Ok!",
-                    }
-                ]
+                "id": "_prospectors",
+                "title": "Prospects",
+                "item": []
             },
             {
-                "id": "_hehe",
-                "title": "Hehe (Can drop item only in working)",
-                "class": "success",
-                "dragTo": ['_done'],
-                "item": [
-                    {
-                        "title": "All right",
-                    },
-                    {
-                        "title": "Ok!",
-                    }
-                ]
+                "id": "_profile_sent",
+                "title": "Profile Sent",
+                "item": []
+            },
+            {
+                "id": "_supporters",
+                "title": "Supporters",
+                "item": []
+            },
+            {
+                "id": "_enquiry",
+                "title": "Enquiry",
+                "item": []
+            },
+            {
+                "id": "_appointment",
+                "title": "Appointment",
+                "item": []
+            },
+            {
+                "id": "_business",
+                "title": "Business",
+                "item": []
             }
         ]
     });
+
+
+$('.kanban-container').addClass('ui cards');
+$('.kanban-board').addClass('card');
+$('.kanban-item').addClass('ui segment');
+
 
 var clicking = false;
 
@@ -159,17 +128,18 @@ var myOffset = 0;
 $('#myKanban').mousemove(function(event){
     if(clicking == false) return;
     if(event.pageX > 500){
-     myOffset = myOffset + 10;
-     $('#scrollContainer').animate({scrollLeft: myOffset}, 50);
+     myOffset = myOffset + 100;
+     $('#scrollContainer').animate({scrollLeft: myOffset}, 100);
  }
 });
 
-<!--$(document).mouseenter(function(event){-->
-<!--if(clicking == false) return;-->
-<!--$('#scrollContainer').animate({scrollLeft: $(currentElement).offset().left}, 800);-->
-<!--});-->
-
+$('.menu .item').tab();
 
 });
+
+
+
+
+
 </script>
 {% endblock %}

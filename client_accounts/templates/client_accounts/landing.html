@@ -8,134 +8,141 @@
 
 
 <div class="ui grid container">
-
-    {% include "sidebar.html" %}
-
-    <div class="twelve wide column">
-        <h2 class="ui header">
-            <i class="plug icon"></i>
+    <div class="sixteen wide column">
+    <div class="row">
+    <div class="ui clearing basic segment">
+        <h2 class="ui left floated header">
             <div class="content">
+                <i class="address book icon"></i>
+
                 Client Management
+
             </div>
+
         </h2>
-        <div class="ui basic segment"></div>
-        <div class="ui three stackable cards">
-            <div class="fluid card">
-                <div class="content">
-                    <div class="header">
-                        Add a client account
-                    </div>
-                    <div class="description">
-                        Add client accounts
-                    </div>
+        <a class="ui right floated primary button">Add lead</a>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="ui three stackable cards">
+        <div class="fluid card">
+            <div class="content">
+                <div class="header">
+                    Add a client account
                 </div>
-                <div id="add_client_button" class="ui bottom attached button">
-                    <i class="add icon"></i>
-                    Add Client account
+                <div class="description">
+                    Add client accounts
                 </div>
             </div>
-
-            <div class="fluid card">
-                <div class="content">
-                    <div class="header">
-                        Add a legal entity
-                    </div>
-                    <div class="description">
-                        Add legal entities to manage your client accounts
-                    </div>
-                </div>
-                <div id="add_legal_entity_button" class="ui bottom attached button">
-                    <i class="add icon"></i>
-                    Add Legal entity
-                </div>
-            </div>
-
-            <div class="fluid card">
-                <div class="content">
-                    <div class="header">
-                        Add a contact
-                    </div>
-                    <div class="description">
-                        Add contact
-                    </div>
-                </div>
-                <div id="add_contact_button" class="ui bottom attached button">
-                    <i class="add icon"></i>
-                    Add Contact
-                </div>
+            <div id="add_client_button" class="ui bottom attached button">
+                <i class="add icon"></i>
+                Add Client account
             </div>
         </div>
 
-        <div class="ui basic segment"></div>
-        <div id="clients_tab">
-            <div class="ui pointing secondary menu">
-                <a class="item" data-tab="clients_table">Client Accounts</a>
-                <a class="item" data-tab="contacts_table">Contacs</a>
-                <a class="item" data-tab="legal_table">Legal Entities</a>
+        <div class="fluid card">
+            <div class="content">
+                <div class="header">
+                    Add a legal entity
+                </div>
+                <div class="description">
+                    Add legal entities to manage your client accounts
+                </div>
             </div>
-            <div class="ui tab segment" data-tab="clients_table">
-                <table id="clients_table" class="ui celled table">
-                    <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>First Name</th>
-                        <th>Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div id="add_legal_entity_button" class="ui bottom attached button">
+                <i class="add icon"></i>
+                Add Legal entity
             </div>
+        </div>
 
-            <div class="ui tab segment" data-tab="contacts_table">
-                <table id="contacts_table" class="ui celled table">
-                    <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>First Name</th>
-                        <th>Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="fluid card">
+            <div class="content">
+                <div class="header">
+                    Add a contact
+                </div>
+                <div class="description">
+                    Add contact
+                </div>
             </div>
-
-            <div class="ui tab segment" data-tab="legal_table">
-                <table id="legal_table" class="ui celled table">
-                    <thead>
-                    <tr>
-                        <th>UID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div id="add_contact_button" class="ui bottom attached button">
+                <i class="add icon"></i>
+                Add Contact
             </div>
         </div>
     </div>
+        </div>
+
+    <div class="ui basic segment"></div>
+    <div id="clients_tab">
+        <div class="ui pointing secondary menu">
+            <a class="item" data-tab="clients_table">Client Accounts</a>
+            <a class="item" data-tab="contacts_table">Contacs</a>
+            <a class="item" data-tab="legal_table">Legal Entities</a>
+        </div>
+        <div class="ui tab segment" data-tab="clients_table">
+            <table id="clients_table" class="ui celled table">
+                <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ui tab segment" data-tab="contacts_table">
+            <table id="contacts_table" class="ui celled table">
+                <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ui tab segment" data-tab="legal_table">
+            <table id="legal_table" class="ui celled table">
+                <thead>
+                <tr>
+                    <th>UID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+    </div>
 
 
 <!--############################# MODALS #################################-->
@@ -292,6 +299,7 @@ $(document).ready(function() {
         <!--$('#add_legal_entity_modal.ui.modal').modal('show');-->
     });
 });
+
 
 
 

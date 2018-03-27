@@ -12,13 +12,33 @@
     {% endblock %}
 </head>
 <body>
+  <div class="ui labeled icon left vertical sidebar menu" style="">
+    <a class="item" href="/">
+      <i class="home icon"></i>
+      Home
+    </a>
+    <a class="item" href="{% url 'client_accounts:landing' %}">
+      <i class="block address book icon"></i>
+      Client Management
+    </a>
+    <a class="item" href="{% url 'lead_management:landing' %}">
+      <i class="handshake icon"></i>
+      Lead Management
+    </a>
+    <a class="item">
+      <i class="calendar icon"></i>
+      Calendar
+    </a>
+  </div>
 <div class="pusher">
 <div class="ui massive menu">
+    <div id="ivory" class="item">
+    <i class="sidebar icon"></i>
+    </div>
     <a href="/" class="header item">
         <i class="large lira sign icon"></i>
         Ivory
     </a>
-    <a href="#" class="item">home</a>
     <div class="right menu">
         <div class="item">
             <div class="ui icon input">
@@ -35,7 +55,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% block top_divider %} <div class="ui hidden divider"></div> {% endblock %}
 {% block content %}{% endblock %}
@@ -89,8 +108,16 @@
       </div>
     </div>
   </div>
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+<script>
+$(document).ready(function() {
+$('.ui.sidebar').sidebar({'dimPage': false, 'closable': false});
+$('.ui.sidebar').sidebar('attach events', '#ivory');
+;
+});
+</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
