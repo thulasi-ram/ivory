@@ -33,7 +33,7 @@
                 </div>
 
             </h2>
-            <a class="ui right floated primary button">Add lead</a>
+            <a class="ui right floated primary button" id="add_lead">Add lead</a>
         </div>
         <div class="ui pointing secondary menu">
             <a class="item active" data-tab="current_leads">Current Leads</a>
@@ -134,6 +134,11 @@ $('#myKanban').mousemove(function(event){
 });
 
 $('.menu .item').tab();
+
+$('#add_lead').click(function(e) {
+        window.open('{% url 'admin:lead_management_lead_add' %}', '_blank');
+        <!--$('#add_contact_modal.ui.modal').modal('show');-->
+    });
 
 });
 

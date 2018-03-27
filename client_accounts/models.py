@@ -40,7 +40,7 @@ class LegalEntity(TimeStampedModel):
 
 
 class ClientAccount(TimeStampedModel):
-    uid = models.CharField(max_length=20)
+    uid = models.CharField(max_length=20, editable=False)
     name = models.CharField(max_length=500)
     legal_account = models.ForeignKey(LegalEntity, null=True, on_delete=models.SET_NULL)
     handled_by = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL, related_name='handled_by',
