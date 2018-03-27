@@ -25,6 +25,7 @@ from common.views import Landing
 urlpatterns = [path('admin/', admin.site.urls),
                url(r'^accounts/', include('allauth.urls')),
                 url(r'^clients/', include(('client_accounts.urls', 'client_accounts'))),
+                url(r'^leads/', include(('lead_management.urls', 'lead_management'))),
                url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
                url(r'^$', Landing.as_view(), name='landing'),
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
