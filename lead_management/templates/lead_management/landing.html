@@ -14,6 +14,7 @@
 
 
 
+
 </style>
 {% endblock %}
 
@@ -110,11 +111,6 @@ $(document).ready(function() {
     });
 
 
-$('.kanban-container').addClass('ui cards');
-$('.kanban-board').addClass('card');
-$('.kanban-item').addClass('ui segment');
-
-
 var clicking = false;
 
 $('.kanban-item').mousedown(function(){
@@ -139,6 +135,21 @@ $('#add_lead').click(function(e) {
         window.open('{% url 'admin:lead_management_lead_add' %}', '_blank');
         <!--$('#add_contact_modal.ui.modal').modal('show');-->
     });
+
+$.ajax({url: "{% url 'lead_management:leads' %}", success: function(leads){
+        console.log(leads);
+                leads.map(function( lead ) {
+        KanbanTest.addElement('_'+ lead.stage, {
+                    "title": lead.uid,
+                })
+        });
+        }});
+
+$("body").bind("DOMNodeInserted", function() {
+   $(this).find('.kanban-container').addClass('ui cards');
+   $(this).find('.kanban-board').addClass('card');
+   $(this).find('.kanban-item').addClass('ui segment');
+});
 
 });
 
