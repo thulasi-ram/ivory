@@ -84,9 +84,10 @@
             <table id="clients_table" class="ui celled table">
                 <thead>
                 <tr>
-                    <th>User Name</th>
-                    <th>First Name</th>
-                    <th>Email</th>
+                    <th>UID</th>
+                    <th>Name</th>
+                    <th>Legal Account</th>
+                    <th>Handled by</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -190,13 +191,18 @@ $(document).ready(function() {
                 dataSrc: ""
             },
             columns: [{
-                    "data": "username"
+                    "data": "uid"
                 },
                 {
-                    "data": "first_name"
+                    "data": "name"
                 },
                 {
-                    "data": "email"
+                    "data": "legal_account.legal_name"
+                },
+                {
+                "data": "handled_by",
+                "render": function ( data, type, full, meta ) {
+                                return '<a>' + data.first_name + data.last_name + '</a>';}
                 }
             ]
         });

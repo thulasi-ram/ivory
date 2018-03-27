@@ -3,10 +3,9 @@ from marshmallow import Schema, fields
 
 
 class UserSchema(Schema):
-    name = fields.String(required=True)
+    first_name = fields.String(required=True)
+    last_name = fields.String(required=True)
     email = fields.Email(required=True)
-    created_at = fields.DateTime(required=True)
-
 
 class AddressSchema(Schema):
     line1 = fields.String(required=True)

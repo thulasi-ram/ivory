@@ -2,31 +2,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 
+from client_accounts.models import ClientAccount
+from client_accounts.schemas import ClientAccountSchema
 from common.views import BaseAPI
 
 
 class ClientsView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        data = [
-            {
-                "url": "http://127.0.0.1:3434/user/2/",
-                "username": "morgoth",
-                "first_name": "morgoth",
-                "email": "duke.valafar@gmail.com",
-                "is_staff": True
-            }, {
-                "url": "http://127.0.0.1:3434/user/3/",
-                "username": "anna",
-                "first_name": "",
-                "email": "anna@anna.com",
-                "is_staff": True
-            }, {
-                "url": "http://127.0.0.1:3434/user/4/",
-                "username": "adam",
-                "first_name": "",
-                "email": "ada@abc.com",
-                "is_staff": False
-            }
-        ]
-        return Response(data=data, status=status.HTTP_200_OK)
+        client_accounts = ClientAccount.objects.all()
+        schema = ClientAccountSchema(many=True, strict=True)
+        return Response(data=schema.dump(client_accounts).data, status=status.HTTP_200_OK)
