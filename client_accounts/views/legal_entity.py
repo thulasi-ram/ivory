@@ -11,7 +11,7 @@ from common.views import BaseAPI
 class LegalEntityView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        legal_entity_uid = request.data.get('legal_entity')
+        legal_entity_uid = request.query_params.get('legal_entity_id')
         legal_entity = LegalEntity.objects.get(uid=legal_entity_uid)
         legal_entity_schema = LegalEntitySchema().dump(legal_entity)
         return Response(data=legal_entity_schema, status=status.HTTP_200_OK)

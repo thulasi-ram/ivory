@@ -32,3 +32,11 @@ class LegalEntitySchema(Schema):
 
     def get_admin_change_url(self, obj, **kwargs):
         return reverse('admin:client_accounts_legalentity_change', args=(obj.id,))
+
+
+class ClientAccountSchema(Schema):
+    uid = fields.String(required=True, dump_only=True)
+    legal_account = fields.Nested(LegalEntitySchema)
+    name = fields.String(required=True)
+    handled_by = fields.Nested(UserSchema)
+    notes = fields.String(required=True)
