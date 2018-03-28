@@ -15,6 +15,7 @@
 
 
 
+
 </style>
 {% endblock %}
 
@@ -63,7 +64,13 @@ $(document).ready(function() {
             console.log("Trigger on all items click!");
         },
         dropEl: function (el) {
-            console.log("Drop on all items drop!");
+        },
+        dragEl: function (el, source) {
+        window.KanbanItemBeingDragged = true;
+        },
+        dragendEl: function (el) {
+        window.KanbanItemBeingDragged = false;
+
         },
         addItemButton: false,
         boards: [
@@ -111,22 +118,23 @@ $(document).ready(function() {
     });
 
 
-var clicking = false;
+window.KanbanItemBeingDragged = false;
 
-$('.kanban-item').mousedown(function(){
-    clicking = true;
-});
-
-$(document).mouseup(function(){
-    clicking = false;
-})
 var myOffset = 0;
-$('#myKanban').mousemove(function(event){
-    if(clicking == false) return;
-    if(event.pageX > 500){
-     myOffset = myOffset + 100;
-     $('#scrollContainer').animate({scrollLeft: myOffset}, 100);
- }
+
+$('.pusher').mousemove(function(event){
+    if(window.KanbanItemBeingDragged == false) return;
+
+    if ((event.pageX - this.offsetLeft) < $(this).width() / 2) {
+        <!--console.log('Left');-->
+        myOffset = myOffset - 100;
+
+    } else {
+    <!--console.log('Right');-->
+        myOffset = myOffset + 100;
+    }
+       <!--console.log('X' + event.pageX + '; Y' + event.pageY);-->
+       $('#kanban').animate({scrollLeft: myOffset}, 100);
 });
 
 $('.menu .item').tab();
@@ -152,9 +160,6 @@ $("body").bind("DOMNodeInserted", function() {
 });
 
 });
-
-
-
 
 
 </script>
