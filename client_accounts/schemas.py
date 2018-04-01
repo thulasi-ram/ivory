@@ -39,3 +39,9 @@ class ClientAccountSchema(Schema):
     name = fields.String(required=True)
     handled_by = fields.Nested(UserSchema)
     notes = fields.String(required=True)
+
+class ContactSchema(Schema):
+    client_account = fields.Nested(ClientAccountSchema)
+    user = fields.Nested(UserSchema)
+    designation = fields.String(required=True)
+    notes = fields.String(required=True)

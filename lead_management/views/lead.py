@@ -16,6 +16,12 @@ class LeadView(BaseAPI):
         return Response(data=legal_entity_schema, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        legal_entity_schema = LeadSchema().load(request.data)
-        Lead.objects.create(**legal_entity_schema)
+        lead_schema = LeadSchema().load(request.data)
+        Lead.objects.create(**lead_schema)
         return Response(data={'request': request}, status=status.HTTP_201_CREATED)
+
+    def put(self, request, *args, **kwargs):
+        lead_id = kwargs.get('lead_id')
+        stage = request.data.get('stage').replace('_', '')
+        Lead.objects.update(uid=lead_id, stage=stage)
+        return Response(data={}, status=status.HTTP_200_OK)
