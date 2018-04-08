@@ -11,3 +11,6 @@ class Profile(TimeStampedModel):
     linkedin_url = models.URLField(default='', blank=True)
     facebook_url = models.URLField(default='', blank=True)
     phone = models.CharField(max_length=15, default='', blank=True)
+
+
+User = get_user_model()
