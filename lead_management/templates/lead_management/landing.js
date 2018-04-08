@@ -41,7 +41,7 @@ $(document).ready(function() {
                 "item": []
             },
             {
-                "id": "_prospectors",
+                "id": "_prospect",
                 "title": "Prospects",
                 "item": []
             },
@@ -51,7 +51,7 @@ $(document).ready(function() {
                 "item": []
             },
             {
-                "id": "_supporters",
+                "id": "_supporter",
                 "title": "Supporters",
                 "item": []
             },
@@ -88,8 +88,6 @@ $('#slider_area').mousemove(function(event){
      $('#kanban').animate({scrollLeft: myOffset}, 100);
 });
 
-$('.menu .item').tab();
-
 function customize_board_css(self){
    self.find('.kanban-container').addClass('ui cards');
    self.find('.kanban-board').addClass('card');
@@ -113,5 +111,45 @@ $.ajax({url: "{% url 'lead_management:leads' %}", success: function(leads){
         });
         }});
 });
+
+    function closed_leads_table() {
+        if ($.fn.dataTable.isDataTable("#closed_leads_table")){
+        return;
+        }
+        $('#closed_leads_table').DataTable({
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search..."
+            },
+            ajax: {
+                url: "{% url 'lead_management:leads' %}" + '?stage=closed',
+                dataSrc: ""
+            },
+            columns: [{
+                    "data": "uid"
+                },
+                {
+                    "data": "contact",
+                    "render": function ( data, type, full, meta ) {
+                                return '<a>' + data.client_account.name + '( ' + data.client_account.uid + ' )' + '</a>';}
+                },
+                {
+                    "data": "contact",
+                    "render": function ( data, type, full, meta ) {
+                                return '<a>' + data.user.first_name + ' ' + data.user.last_name + '</a>';}
+                }
+            ]
+        });
+        $(".dataTables_filter label").addClass("ui input");
+
+    }
+
+    function tab_load(tab_name) {
+        if (tab_name == 'closed_leads'){
+        closed_leads_table()
+        }
+    }
+
+    $('.menu .item').tab({'onFirstLoad':tab_load});
 
 {% endblock %}

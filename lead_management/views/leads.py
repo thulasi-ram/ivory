@@ -10,6 +10,9 @@ from lead_management.schemas import LeadSchema
 class LeadsView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        leads = Lead.objects.all()
+        stage = request.query_params.get('stage')
+        leads = Lead.objects.filter(created_by=request.user)
+        if stage:
+            leads = leads.filter(stage=stage)
         schema = LeadSchema(many=True, strict=True)
         return Response(data=schema.dump(leads).data, status=status.HTTP_200_OK)

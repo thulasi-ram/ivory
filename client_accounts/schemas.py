@@ -7,6 +7,7 @@ class UserSchema(Schema):
     last_name = fields.String(required=True)
     email = fields.Email(required=True)
 
+
 class AddressSchema(Schema):
     line1 = fields.String(required=True)
     line2 = fields.String(required=True)
@@ -39,6 +40,7 @@ class ClientAccountSchema(Schema):
     name = fields.String(required=True)
     handled_by = fields.Nested(UserSchema)
     notes = fields.String(required=True)
+
 
 class ContactSchema(Schema):
     client_account = fields.Nested(ClientAccountSchema)

@@ -35,7 +35,7 @@ class ContactAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Contact.objects.none()
 
-        qs = Contact.objects.filter(client_account__user=self.request.user)
+        qs = Contact.objects.filter(client_account__handled_by=self.request.user)
 
         if self.q:
             qs = qs.filter(Q(client_account__name__istartswith=self.q) | Q(user__name__istartswith=self.q))

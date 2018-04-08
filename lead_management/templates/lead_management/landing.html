@@ -5,6 +5,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/jkanban.min.css' %}">
+<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
 <style>
 #kanban {
  overflow-x: auto;
@@ -45,6 +46,22 @@
             <div id="kanban"></div>
         </div>
         <div class="ui tab" data-tab="closed_leads">
+            <table id="closed_leads_table" class="ui celled table">
+                <thead>
+                <tr>
+                    <th>UID</th>
+                    <th>Client Account</th>
+                    <th>Contact</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -52,6 +69,8 @@
 
 {% endblock %}
 {% block scripts %}
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
 <script src="{% static 'js/jkanban.min.js' %}"></script>
 <script> {% include "lead_management/landing.js" %} </script>
 {% endblock %}

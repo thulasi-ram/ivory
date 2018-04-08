@@ -104,9 +104,9 @@
             <table id="contacts_table" class="ui celled table">
                 <thead>
                 <tr>
-                    <th>User Name</th>
-                    <th>First Name</th>
-                    <th>Email</th>
+                    <th>User</th>
+                    <th>Client Account</th>
+                    <th>Designation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -224,13 +224,17 @@ $(document).ready(function() {
                 dataSrc: ""
             },
             columns: [{
-                    "data": "username"
+                    "data": "client_account",
+                    "render": function ( data, type, full, meta ) {
+                                return '<a>' + data.name + '( ' + data.uid + ' )' + '</a>';}
                 },
                 {
-                    "data": "first_name"
+                    "data": "user",
+                    "render": function ( data, type, full, meta ) {
+                                return '<a>' + data.first_name + ' ' + data.last_name + '</a>';}
                 },
                 {
-                    "data": "email"
+                    "data": "designation"
                 }
             ]
         });

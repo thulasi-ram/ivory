@@ -10,6 +10,6 @@ from common.views import BaseAPI
 class ClientsView(BaseAPI):
 
     def get(self, request, *args, **kwargs):
-        client_accounts = ClientAccount.objects.all()
+        client_accounts = ClientAccount.objects.filter(handled_by=request.user)
         schema = ClientAccountSchema(many=True, strict=True)
         return Response(data=schema.dump(client_accounts).data, status=status.HTTP_200_OK)
