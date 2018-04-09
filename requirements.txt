@@ -4,4 +4,4 @@ django-role-permissions==2.2.0
 django-allauth==0.35.0
 djutil==0.2
 djangorestframework==3.7.7
-django-autocomplete-light=3.2.10
+django-autocomplete-light==3.2.10
