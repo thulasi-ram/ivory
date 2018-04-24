@@ -5,3 +5,5 @@ django-allauth==0.35.0
 djutil==0.2
 djangorestframework==3.7.7
 django-autocomplete-light==3.2.10
+django-activity-stream==0.6.5
+django-scheduler==0.8.8

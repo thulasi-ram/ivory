@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'rest_framework',
+    'schedule',
+    'actstream',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,10 @@ ACCOUNT_LOGOUT_ON_GET = True
 SITE_ID = 1
 
 LOGIN_URL = '/accounts/login'
+
+ACTSTREAM_SETTINGS = {
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': True,
+    'GFK_FETCH_DEPTH': 1,
+}

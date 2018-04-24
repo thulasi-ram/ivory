@@ -14,5 +14,7 @@ class LeadsView(BaseAPI):
         leads = Lead.objects.filter(created_by=request.user)
         if stage:
             leads = leads.filter(stage=stage)
+        else:
+            leads = leads.exclude(stage=Lead.Stage.CLOSED)
         schema = LeadSchema(many=True, strict=True)
         return Response(data=schema.dump(leads).data, status=status.HTTP_200_OK)

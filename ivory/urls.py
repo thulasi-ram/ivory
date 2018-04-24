@@ -22,10 +22,11 @@ from django.urls import path, include
 
 from common.views import Landing
 
-urlpatterns = [path('admin/', admin.site.urls),
+urlpatterns = [url(r'^$', Landing.as_view(), name='landing'),
+               path('admin/', admin.site.urls),
                url(r'^accounts/', include('allauth.urls')),
+               url('^activity/', include('actstream.urls')),
                url(r'^client_accounts/', include(('client_accounts.urls', 'client_accounts'))),
                url(r'^lead_management/', include(('lead_management.urls', 'lead_management'))),
                url(r'^user_profile/', include(('user_profile.urls', 'user_profile'))),
-               url(r'^$', Landing.as_view(), name='landing'),
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

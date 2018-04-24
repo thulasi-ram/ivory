@@ -11,19 +11,15 @@ from user_profile.models import User
 class Lead(TimeStampedModel):
     class Stage:
         IDENTIFY = 'identify'
-        CALL = 'call'
         PROSPECT = 'prospect'
-        PROFILE_SENT = 'profile_sent'
         SUPPORTER = 'supporter'
         ENQUIRY = 'enquiry'
-        APPOINTMENT = 'appointment'
         BUSINESS = 'business'
         CLOSED = 'closed'
 
-        CHOICES = ((x, x) for x in [IDENTIFY, CALL, PROSPECT, PROFILE_SENT, SUPPORTER, ENQUIRY, APPOINTMENT,
-                                    BUSINESS, CLOSED])
+        CHOICES = ((x, x) for x in [IDENTIFY, PROSPECT, SUPPORTER, ENQUIRY, BUSINESS, CLOSED])
 
-    uid = models.CharField(max_length=20, editable=False)
+    uid = models.CharField(max_length=20, editable=False, unique=True)
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
     stage = models.CharField(max_length=20, choices=Stage.CHOICES)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL,

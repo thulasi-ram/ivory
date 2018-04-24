@@ -36,18 +36,8 @@ $(document).ready(function() {
                 "item": []
             },
             {
-                "id": "_call",
-                "title": "Call",
-                "item": []
-            },
-            {
                 "id": "_prospect",
                 "title": "Prospects",
-                "item": []
-            },
-            {
-                "id": "_profile_sent",
-                "title": "Profile Sent",
                 "item": []
             },
             {
@@ -58,11 +48,6 @@ $(document).ready(function() {
             {
                 "id": "_enquiry",
                 "title": "Enquiry",
-                "item": []
-            },
-            {
-                "id": "_appointment",
-                "title": "Appointment",
                 "item": []
             },
             {
