@@ -19,6 +19,7 @@
 
 
 
+
 </style>
 {% endblock %}
 
@@ -70,18 +71,31 @@
     <div class="ui modal" id="lead_popup">
         <div class="header"></div>
         <div class="content">
-            <div class="row">
-                <div class="ui checkbox" id="called">
-                    <input type="checkbox" name="called">
-                    <label>Called</label>
+            <div class="three ui buttons">
+                <div class="ui animated button" tabindex="0">
+                    <div class="visible content">Call</div>
+                    <div class="hidden content">
+                        Call Again
+                        <i class="right arrow icon"></i>
+                    </div>
                 </div>
-                <div class="ui checkbox" id="profile_sent">
-                    <input type="checkbox" name="called">
-                    <label>Profile sent</label>
+                <div class="ui animated button" tabindex="0">
+                    <div class="visible content">Profile sent</div>
+                    <div class="hidden content">
+                        Send Again
+                        <i class="right arrow icon"></i>
+                    </div>
+                </div>
+                <div class="ui button" tabindex="0">
+                    <div class="content">Make appointment</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="ui modal" id="user_popup">
+    </div>
+
 </div>
 
 {% endblock %}
