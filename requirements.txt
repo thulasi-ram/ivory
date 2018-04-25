@@ -7,3 +7,5 @@ djangorestframework==3.7.7
 django-autocomplete-light==3.2.10
 django-activity-stream==0.6.5
 django-scheduler==0.8.8
+django-jsonfield==1.0.1
+django-jsonfield-compat==0.4.4
