@@ -6,6 +6,7 @@ class UserSchema(Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.Email(required=True)
+    phone = fields.String(required=True, attribute='profile.phone')
 
 
 class AddressSchema(Schema):

@@ -5,7 +5,6 @@
     <title>{% block title %}Ivory{% endblock %}</title>
     {% load i18n %}
     {% load static %}
-    {% load static %}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"/>
     {% block styles %}
@@ -30,7 +29,7 @@
         Calendar
     </a>
     {% if request.user.is_authenticated %}
-    <a class="item">
+    <a class="item" href="{% url 'user_profile:user-profile' %}">
         <i class="user icon"></i>
         Profile
     </a>
