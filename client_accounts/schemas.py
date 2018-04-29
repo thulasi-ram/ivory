@@ -1,5 +1,5 @@
 from django.urls import reverse
-from marshmallow import Schema, fields, pre_load
+from marshmallow import Schema, fields
 
 
 class UserProfileSchema(Schema):
@@ -39,6 +39,7 @@ class LegalEntitySchema(Schema):
     def get_admin_change_url(self, obj, **kwargs):
         return reverse('admin:client_accounts_legalentity_change', args=(obj.id,))
 
+
 class ClientAddressSchema(Schema):
     line1 = fields.String(required=True, attribute='address.line1')
     line2 = fields.String(required=True, attribute='address.line2')
@@ -47,6 +48,7 @@ class ClientAddressSchema(Schema):
     country = fields.String(required=True, attribute='address.country')
     pincode = fields.String(required=True, attribute='address.pincode')
     address_type = fields.String(required=True)
+
 
 class ClientAccountSchema(Schema):
     uid = fields.String(required=True, dump_only=True)
@@ -57,7 +59,8 @@ class ClientAccountSchema(Schema):
     addresses = fields.Method('get_addresses')
 
     def get_addresses(self, obj, **kwargs):
-        return ClientAddressSchema(many=True).dump(obj.addresses.all())
+        address_data, errors = ClientAddressSchema(many=True).dump(obj.addresses.all())
+        return address_data
 
 
 class ContactSchema(Schema):

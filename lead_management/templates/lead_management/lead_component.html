@@ -7,6 +7,28 @@
                     <div class="content">{{contact.client_account.name}}</div>
                 </h1>
                 <div class="row">
+                    <div class="row">
+                        <a class="ui tag label">Called</a>
+                        <a class="ui tag label">Profile sent</a>
+
+
+                        <div class="ui right floated main menu">
+                            <div class="ui basic buttons">
+                                <a class="ui icon button" data-tooltip="Log a call">
+                                    <i class="phone icon"></i>
+                                </a>
+                                <a class="ui icon button" data-tooltip="Send Profile">
+                                    <i class="inbox icon"></i>
+                                </a>
+                                <a class="ui icon button" data-tooltip="Set a reminder">
+                                    <i class="calendar alternate outline icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                     <h4 class="ui dividing header">Legal details</h4>
                     <div class="row">
                         <a href="{{contact.client_account.legal_account.admin_change_url}}">{{contact.client_account.legal_account.legal_name}}</a>
@@ -30,9 +52,14 @@
 
                 </div>
 
-                {% for address in contact.client_account.addresses %}
+                <div class="ui hidden divider"></div>
+
+                <h4 class="ui dividing header">Addresses</h4>
+                <div class="ui three stackable cards">
+                    {% for address in contact.client_account.addresses %}
                     {% include 'address_component.html' with address=address %}
-                {% endfor %}
+                    {% endfor %}
+                </div>
 
 
             </div>

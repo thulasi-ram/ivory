@@ -1,15 +1,17 @@
 <div class="ui card">
     <div class="content">
-        <div class="ui form">
-            <div class="field">
-                <label>{{address.line1}}</label>
-                <input type="text">
-            </div>
-        </div>
+    {{address.line1}}
+        <br>
+        {{address.line2}}
+        <br>
+        {{address.city}}, {{address.state}}, {{address.country}} - {{address.pincode}}
     </div>
     <div class="extra content">
+              <span class="right floated">
+        {{address.address_type}}
+      </span>
         <span>
-        <i class="user icon"></i>
+        <i class="maps icon"></i>
         {{maps}}
       </span>
     </div>
