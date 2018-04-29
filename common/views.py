@@ -8,13 +8,13 @@ from rest_framework.views import APIView
 
 class BaseAPI(APIView):
     template_name = None
-    renderer_classes = (JSONRenderer, BrowsableAPIRenderer,)
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer,]
     authentication_classes = (SessionAuthentication, )
     permission_classes = ()
 
     def dispatch(self, request, *args, **kwargs):
         if self.template_name:
-            self.renderer_classes = (TemplateHTMLRenderer,)
+            self.renderer_classes = [TemplateHTMLRenderer] + self.renderer_classes
         return super().dispatch(request, *args, **kwargs)
 
 

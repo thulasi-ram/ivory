@@ -1,0 +1,24 @@
+<div class="ui centered card">
+    <div class="image">
+        {% load static %}
+        <img src="{% static 'images/image-wireframe.png' %}">
+    </div>
+    <div class="content">
+        <div class="header">{{user.first_name}} {{user.last_name}}</div>
+        <div class="meta">
+            <a>{{user.profile.designation}}</a>
+        </div>
+        <div class="description">
+            {{user.profile.about}}
+        </div>
+    </div>
+    <div class="extra content">
+      <span class="right floated">
+        {{user.profile.phone}}
+      </span>
+        <span>
+        <i class="user icon"></i>
+        {{user.email}}
+      </span>
+    </div>
+</div>

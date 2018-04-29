@@ -9,13 +9,14 @@ from lead_management.schemas import LeadSchema
 
 
 class LeadView(BaseAPI):
-    authentication_classes = (CsrfExemptSessionAuthentication, )
+    template_name = 'lead_management/lead.html'
+    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     def get(self, request, *args, **kwargs):
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
-        legal_entity_schema = LeadSchema().dump(lead)
-        return Response(data=legal_entity_schema, status=status.HTTP_200_OK)
+        lead_data, errors = LeadSchema().dump(lead)
+        return Response(data=lead_data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         lead_schema = LeadSchema().load(request.data)
@@ -26,6 +27,6 @@ class LeadView(BaseAPI):
         lead_id = kwargs.get('lead_id')
         stage = request.data.get('stage').replace('_', '')
         lead = Lead.objects.get(uid=lead_id)
-        lead.stage=stage
+        lead.stage = stage
         lead.save()
         return Response(data={}, status=status.HTTP_200_OK)

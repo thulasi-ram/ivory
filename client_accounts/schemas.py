@@ -4,7 +4,7 @@ from marshmallow import Schema, fields
 
 class UserProfileSchema(Schema):
     phone = fields.String(required=False)
-    linkedin_url = fields.URL(required=False)
+    linkedin_url = fields.URL(required=False, default='')
 
 
 class UserSchema(Schema):

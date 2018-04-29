@@ -6,7 +6,10 @@ $(document).ready(function () {
         gutter: '10px',
         dragBoards: false,
         widthBoard: '300px',
-        click: function (el) { $('#lead_popup').modal({ onShow: lead_details(el), centered: false }).modal('show'); },
+        click: function (el) {
+//        $('#lead_popup').modal({ onShow: lead_details(el), centered: false }).modal('show');
+            window.location.href = "{% url 'lead_management:lead' '' %}" + el.textContent;
+        },
         dropEl: function (el, target, source, sibling) {
             alert("This will move " + el.textContent + ' from ' + $(source.parentElement).find('.kanban-title-board')[0].textContent + ' to ' + $(target.parentElement).find('.kanban-title-board')[0].textContent);
             $.ajax({
@@ -76,6 +79,7 @@ $(document).ready(function () {
             url: '/lead_management/lead/' + el.textContent,
             type: 'GET',
             data: {},
+            headers: {"Accept": "application/json"},
             success: function (result) {
                 data = result[0];
                 $('#lead_popup .header')[0].textContent = data.uid;
