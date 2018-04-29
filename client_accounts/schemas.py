@@ -2,11 +2,16 @@ from django.urls import reverse
 from marshmallow import Schema, fields
 
 
+class UserProfileSchema(Schema):
+    phone = fields.String(required=False)
+    linkedin_url = fields.URL(required=False)
+
+
 class UserSchema(Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.Email(required=True)
-    phone = fields.String(required=True, attribute='profile.phone')
+    profile = fields.Nested(UserProfileSchema)
 
 
 class AddressSchema(Schema):

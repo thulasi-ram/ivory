@@ -23,7 +23,7 @@ class UserAutocomplete(autocomplete.Select2QuerySetView):
 
 class UserProfile(BaseAPI):
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    template_name = 'user_profile/user_small.html'
+    template_name = 'user_profile/user.html'
 
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('user_id')
