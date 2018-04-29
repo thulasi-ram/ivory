@@ -68,7 +68,7 @@ class ClientAccountAddresses(TimeStampedModel):
         CHOICES = ((x, x) for x in [CONTACT, BILLING, SHIPPING])
 
     address = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
-    client_account = models.ForeignKey(ClientAccount, null=True, on_delete=models.CASCADE)
+    client_account = models.ForeignKey(ClientAccount, null=True, on_delete=models.CASCADE, related_name='addresses')
     address_type = models.CharField(max_length=20, blank=True, default='', choices=AddressType.CHOICES)
 
 

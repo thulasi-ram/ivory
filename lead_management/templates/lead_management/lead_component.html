@@ -1,24 +1,47 @@
-<div class="ui centered card">
-    <div class="image">
-        {% load static %}
-        <img src="{% static 'images/image-wireframe.png' %}">
-    </div>
-    <div class="content">
-        <div class="header">{{user.first_name}} {{user.last_name}}</div>
-        <div class="meta">
-            <a>{{user.profile.designation}}</a>
+<div class="ui container grid">
+    <div class="row">
+        <div class="twelve wide column">
+            <div class="ui centered segment">
+                <h1 class="ui header">
+                    <i class="plug icon"></i>
+                    <div class="content">{{contact.client_account.name}}</div>
+                </h1>
+                <div class="row">
+                    <h4 class="ui dividing header">Legal details</h4>
+                    <div class="row">
+                        <a href="{{contact.client_account.legal_account.admin_change_url}}">{{contact.client_account.legal_account.legal_name}}</a>
+                    </div>
+
+                    <div class="row">Gstin: {{contact.client_account.legal_account.gstin}}</div>
+
+                </div>
+
+                <div class="ui hidden divider"></div>
+
+                <div class="row">
+                    <div class="ui form">
+                        <h4 class="ui dividing header">Notes</h4>
+
+                        <div class="disabled field">
+                            <label></label>
+                            <textarea rows="2">{{contact.client_account.notes}}</textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% for address in contact.client_account.addresses %}
+                    {% include 'address_component.html' with address=address %}
+                {% endfor %}
+
+
+            </div>
         </div>
-        <div class="description">
-            {{user.profile.about}}
+        <div class="four wide column">
+            {% include 'user_profile/user_component.html' with user=contact.user %}
         </div>
     </div>
-    <div class="extra content">
-      <span class="right floated">
-        {{user.profile.phone}}
-      </span>
-        <span>
-        <i class="user icon"></i>
-        {{user.email}}
-      </span>
+    <div class="row">
     </div>
+
 </div>

@@ -20,7 +20,7 @@ class ClientAccountAddressInlineFormset(BaseInlineFormSet):
             if not hasattr(form, 'cleaned_data'):
                 continue
             data = form.cleaned_data
-            address_type = data.get('percent')
+            address_type = data.get('address_type')
 
             if not address_type:
                 raise ValidationError('Address type is required')

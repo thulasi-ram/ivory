@@ -12,8 +12,8 @@ class ClientView(BaseAPI):
     def get(self, request, *args, **kwargs):
         client_id = kwargs.get('client_id')
         client_account = ClientAccount.objects.get(uid=client_id)
-        client_account_schema = ClientAccountSchema().dump(client_account)
-        return Response(data=client_account_schema, status=status.HTTP_200_OK)
+        client_account_data, errors = ClientAccountSchema().dump(client_account)
+        return Response(data=client_account_data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         client_account_schema = ClientAccountSchema().load(request.data)
