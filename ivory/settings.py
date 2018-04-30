@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'common',
     'client_accounts',
     'lead_management',
-    'user_profile',
+    'user_profile.apps.UserProfileConfig',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
