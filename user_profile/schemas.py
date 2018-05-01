@@ -11,6 +11,7 @@ class UserSchema(Schema):
     username = fields.String(required=True)
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
+    full_name = fields.String(attribute='get_full_name')
     email = fields.Email(required=True)
     profile = fields.Nested(UserProfileSchema)
     view_url = fields.Method('get_view_url')

@@ -6,6 +6,13 @@ from djutil.models import TimeStampedModel
 User = get_user_model()
 
 
+def get_full_name(self):
+    return self.get_full_name()
+
+
+User.add_to_class("__str__", get_full_name)
+
+
 class Salutation(TimeStampedModel):
     title = models.CharField(max_length=100, unique=True)
 

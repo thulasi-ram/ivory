@@ -46,8 +46,11 @@ $('#add_a_reminder').on('click', function() {
             data: {"action_type": "add_reminder"},
             headers: {},
             success: function (result) {
-                data = result;
-            }
+                new Noty({theme:'nest', text: 'Added a reminder',}).show();
+            },
+            error: function (result) {
+                new Noty({theme:'nest', text: 'Something went wrong',}).show();
+            },
         });
 
         });
