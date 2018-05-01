@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="ui container grid">
     <div class="row">
         <div class="twelve wide column">
@@ -5,7 +7,7 @@
                 <h1 class="ui header">
                     <i class="building icon"></i>
                     <div class="content">
-                        <a href="{% url 'client_accounts:client' client_account.uid %}">{{lead.client_account.name}}
+                        <a href="{% url 'client_accounts:client' lead.client_account.uid %}">{{lead.client_account.name}}
                             <h5>{{lead.client_account.uid}}</h5>
                         </a>
                     </div>
@@ -34,13 +36,14 @@
                                 </a>
                             </div>
                         </div>
+                          <div class="ui hidden clearing divider"></div>
 
 
                     </div>
 
                     <h4 class="ui dividing header">Legal details</h4>
                     <div class="row">
-                        <a href="{% url 'client_accounts:legal_entity' client_account.legal_account.uid %}">
+                        <a href="{% url 'client_accounts:legal_entity' lead.client_account.legal_account.uid %}">
                             {{lead.client_account.legal_account.legal_name}}</a>
                     </div>
 
@@ -51,8 +54,7 @@
                 <div class="ui hidden divider"></div>
 
                 <div class="row">
-                    <div class="ui basic segment"> Notes: {{lead.notes}}
-                    </div>
+                    Notes: {{lead.notes}}
                 </div>
 
                 <div class="ui hidden divider"></div>
@@ -72,6 +74,9 @@
 
                     {% for item in feed %}
                     <div class="event">
+                        <div class="label">
+                            <img src="{% if item.profile_url %} {{item.profile_url}} {% else %} {% static '/images/jenny.jpg' %} {% endif %}">
+                        </div>
                         <div class="content">
                             <div class="summary">
                                 {{ item.title }}
