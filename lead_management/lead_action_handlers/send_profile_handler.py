@@ -8,4 +8,4 @@ class SendProfileActionHandler(BaseActionHandler):
 
     def handle(self, lead_id, user, **kwargs):
         lead = Lead.objects.get(uid=lead_id)
-        action.send(user, verb='sent profile', target=lead)
+        action.send(user, verb='sent profile to', target=lead)

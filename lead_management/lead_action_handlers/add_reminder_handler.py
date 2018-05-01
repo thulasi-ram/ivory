@@ -8,4 +8,4 @@ class AddReminderActionHandler(BaseActionHandler):
 
     def handle(self, lead_id, user, **kwargs):
         lead = Lead.objects.get(uid=lead_id)
-        action.send(user, verb='added a reminder', target=lead)
+        action.send(user, verb='added a reminder to', target=lead)
