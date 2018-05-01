@@ -20,8 +20,11 @@ $('#log_a_call').on('click', function() {
             data: {"action_type": "log_call"},
             headers: {},
             success: function (result) {
-                data = result;
-            }
+                new Noty({type: 'success', text: 'Logged the call',}).show();
+            },
+            error: function (result) {
+                new Noty({type: 'error', text: 'Something went wrong',}).show();
+            },
         });
 
         });
@@ -33,8 +36,11 @@ $('#send_profile').on('click', function() {
             data: {"action_type": "send_profile"},
             headers: {},
             success: function (result) {
-                data = result;
-            }
+                new Noty({type: 'success', text: 'Sent profiler',}).show();
+            },
+            error: function (result) {
+                new Noty({type: 'error', text: 'Something went wrong',}).show();
+            },
         });
 
         });
@@ -46,10 +52,10 @@ $('#add_a_reminder').on('click', function() {
             data: {"action_type": "add_reminder"},
             headers: {},
             success: function (result) {
-                new Noty({theme:'nest', text: 'Added a reminder',}).show();
+                new Noty({type: 'success', text: 'Added a reminder',}).show();
             },
             error: function (result) {
-                new Noty({theme:'nest', text: 'Something went wrong',}).show();
+                new Noty({type: 'error', text: 'Something went wrong',}).show();
             },
         });
 
