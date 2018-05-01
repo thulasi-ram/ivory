@@ -12,9 +12,9 @@ class LeadsView(BaseAPI):
     def get(self, request, *args, **kwargs):
         stage = request.query_params.get('stage')
         leads = Lead.objects.filter(created_by=request.user)
-        if stage:
+        if stage == Lead.Stage.CLOSED:
+            leads = leads.exclude(active=True)
+        elif stage:
             leads = leads.filter(stage=stage)
-        else:
-            leads = leads.exclude(stage=Lead.Stage.CLOSED)
         schema = LeadSchema(many=True)
         return Response(data=schema.dump(leads).data, status=status.HTTP_200_OK)

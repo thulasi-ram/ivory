@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, ModelChoiceField, BaseInlineFormSet
 
-from client_accounts.models import LegalEntity, ClientAccount, ClientAccountAddresses
+from client_accounts.models import LegalEntity, ClientAccount, ClientAccountAddresses, BusinessType
 from common.models import Address
 from user_profile.models import User
 
@@ -81,3 +81,4 @@ class LegalEntityAdmin(admin.ModelAdmin):
 
 admin.site.register(LegalEntity, LegalEntityAdmin)
 admin.site.register(ClientAccount, ClientAccountAdmin)
+admin.site.register(BusinessType)

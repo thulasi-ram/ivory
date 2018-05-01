@@ -8,17 +8,24 @@ from common.utils import make_meanigful_id
 from user_profile.models import User
 
 
+class BusinessType(TimeStampedModel):
+    title = models.CharField(max_length=500, unique=True)
+
+    def __str__(self):
+        return self.title
+
+
 class LegalEntity(TimeStampedModel):
     uid = models.CharField(max_length=20, editable=False)
     name = models.CharField(max_length=500)
-    business_type = models.CharField(max_length=500)
+    business_type = models.ForeignKey(BusinessType, null=True, on_delete=models.SET_NULL)
     gstin = models.CharField(max_length=500, default='', blank=True)
     company_email = models.EmailField(max_length=2000, default='', blank=True)
     company_phone = models.CharField(max_length=2000, default='', blank=True)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, default=get_current_user,
                                    editable=False)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
-    notes = models.TextField()
+    notes = models.TextField(default='', blank=True)
 
     @cached_property
     def legal_name(self):
@@ -45,7 +52,7 @@ class ClientAccount(TimeStampedModel):
                                    default=get_current_user)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='account_created_by',
                                    default=get_current_user, editable=False)
-    notes = models.TextField()
+    notes = models.TextField(default='', blank=True)
 
     def __str__(self):
         return '{n} ({i}) ({u})'.format(n=self.name, u=self.handled_by, i=self.uid)

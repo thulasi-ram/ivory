@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.forms import ModelForm, ModelChoiceField
 
 from client_accounts.models import ClientAccount
-from lead_management.models import Lead
+from lead_management.models import Lead, LeadStage, Designation
 from user_profile.models import User
 
 
@@ -28,3 +28,5 @@ class LeadAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Lead, LeadAdmin)
+admin.site.register(LeadStage)
+admin.site.register(Designation)
