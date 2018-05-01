@@ -1,5 +1,5 @@
 # Create your views here.
-from actstream.models import target_stream
+from actstream.models import target_stream, any_stream
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -39,7 +39,7 @@ class LeadView(BaseAPI):
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
         lead_data, errors = LeadSchema().dump(lead)
-        feed = [get_json_feed(item) for item in target_stream(lead)]
+        feed = [get_json_feed(item) for item in any_stream(lead)]
         return Response(data={'lead': lead_data, 'feed': feed}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):

@@ -16,7 +16,7 @@ class LeadActionView(BaseAPI):
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
         if action_type == 'log_a_call':
-            action.send(request.user, verb='called', target=lead, action_object=lead.contact)
+            action.send(request.user, verb='called', action_object=lead)
         elif action_type == 'send_profile':
             action.send(request.user, verb='sent profile', target=lead)
         elif action_type == 'add_a_reminder':
