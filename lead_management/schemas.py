@@ -1,3 +1,4 @@
+from django.urls import reverse
 from marshmallow import Schema, fields
 
 from client_accounts.schemas import ClientAccountSchema
@@ -19,3 +20,7 @@ class LeadSchema(Schema):
     active = fields.Boolean()
     has_been_called = fields.Boolean()
     has_been_sent_profile = fields.Boolean()
+    view_url = fields.Method('get_view_url')
+
+    def get_view_url(self, obj):
+        return reverse('lead_management:lead', kwargs={'lead_id': obj.uid})

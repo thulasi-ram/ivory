@@ -16,6 +16,10 @@ class LegalEntitySchema(Schema):
     notes = fields.String(required=True)
     address = fields.Nested(AddressSchema)
     admin_change_url = fields.Method('get_admin_change_url')
+    view_url = fields.Method('get_view_url')
+
+    def get_view_url(self, obj):
+        return reverse('client_accounts:legal_entity', kwargs={'legal_entity_id': obj.uid})
 
     def get_admin_change_url(self, obj, **kwargs):
         return reverse('admin:client_accounts_legalentity_change', args=(obj.id,))
@@ -38,7 +42,11 @@ class ClientAccountSchema(Schema):
     handled_by = fields.Nested(UserSchema)
     notes = fields.String(required=True)
     addresses = fields.Method('get_addresses')
+    view_url = fields.Method('get_view_url')
 
-    def get_addresses(self, obj, **kwargs):
+    def get_addresses(self, obj):
         address_data, errors = ClientAddressSchema(many=True).dump(obj.addresses.all())
         return address_data
+
+    def get_view_url(self, obj):
+        return reverse('client_accounts:client', kwargs={'client_id': obj.uid})

@@ -1,3 +1,4 @@
+from django.urls import reverse
 from marshmallow import Schema, fields
 
 
@@ -7,7 +8,12 @@ class UserProfileSchema(Schema):
 
 
 class UserSchema(Schema):
+    username = fields.String(required=True)
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.Email(required=True)
     profile = fields.Nested(UserProfileSchema)
+    view_url = fields.Method('get_view_url')
+
+    def get_view_url(self, obj):
+        return reverse('user_profile:user-profile', kwargs={'username': obj.username})

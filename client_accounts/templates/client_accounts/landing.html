@@ -150,7 +150,9 @@ $(document).ready(function() {
                 dataSrc: ""
             },
             columns: [{
-                    "data": "uid"
+                    "data": null,
+                    "render": function ( data, type, full, meta ) {
+                                return '<a href="' + data.view_url +'" >' + data.uid + '</a>';}
                 },
                 {
                     "data": "name"
@@ -161,7 +163,7 @@ $(document).ready(function() {
                 {
                 "data": "handled_by",
                 "render": function ( data, type, full, meta ) {
-                                return '<a>' + data.first_name + data.last_name + '</a>';}
+                                return '<a href="' + data.view_url +'" >' + data.first_name + data.last_name + '</a>';}
                 }
             ]
         });
@@ -183,7 +185,9 @@ $(document).ready(function() {
                 dataSrc: ""
             },
             columns: [{
-                    "data": "uid"
+                    "data": null,
+                    "render": function ( data, type, full, meta ) {
+                                return '<a href="' + data.view_url +'" >' + data.uid + '</a>';}
                 },
                 {
                     "data": "legal_name"

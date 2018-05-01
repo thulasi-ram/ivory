@@ -29,7 +29,7 @@
         Calendar
     </a>
     {% if request.user.is_authenticated %}
-    <a class="item" href="{% url 'user_profile:user-profile' %}">
+    <a class="item" href="{% url 'user_profile:user-profile' request.user.username %}">
         <i class="user icon"></i>
         Profile
     </a>

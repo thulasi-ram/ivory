@@ -26,10 +26,8 @@ class UserProfile(BaseAPI):
     template_name = 'user_profile/user.html'
 
     def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('user_id')
-        if not user_id:
-            user_id = request.user.id
-        user = User.objects.get(id=user_id)
+        username = kwargs.get('username')
+        user = User.objects.get(username=username)
         user_data, errors = UserSchema().dump(user)
         return Response(data=user_data, status=status.HTTP_200_OK)
 
