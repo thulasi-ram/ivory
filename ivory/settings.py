@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'common',
-    'client_accounts',
-    'lead_management',
+    'client_accounts.apps.ClientAccountsConfig',
+    'lead_management.apps.LeadManagementConfig',
     'user_profile.apps.UserProfileConfig',
 
     'allauth',
