@@ -56,20 +56,6 @@
             </div>
         </div>
 
-        <div class="fluid card">
-            <div class="content">
-                <div class="header">
-                    Add a contact
-                </div>
-                <div class="description">
-                    Add contact
-                </div>
-            </div>
-            <div id="add_contact_button" class="ui bottom attached button">
-                <i class="add icon"></i>
-                Add Contact
-            </div>
-        </div>
     </div>
         </div>
 
@@ -77,7 +63,6 @@
     <div id="clients_tab">
         <div class="ui pointing secondary menu">
             <a class="item" data-tab="clients_table">Client Accounts</a>
-            <a class="item" data-tab="contacts_table">Contacs</a>
             <a class="item" data-tab="legal_table">Legal Entities</a>
         </div>
         <div class="ui tab segment" data-tab="clients_table">
@@ -88,25 +73,6 @@
                     <th>Name</th>
                     <th>Legal Account</th>
                     <th>Handled by</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="ui tab segment" data-tab="contacts_table">
-            <table id="contacts_table" class="ui celled table">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Client Account</th>
-                    <th>Designation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -150,13 +116,6 @@
 
 <div id="add_client_modal" class="ui modal">
     <div class="header">Add client</div>
-    <div class="scrolling content">
-        <p>Very long content goes here</p>
-    </div>
-</div>
-
-<div id="add_contact_modal" class="ui modal">
-    <div class="header">Add contact</div>
     <div class="scrolling content">
         <p>Very long content goes here</p>
     </div>
@@ -210,38 +169,6 @@ $(document).ready(function() {
 
     }
 
-    function contacts_table() {
-        if ($.fn.dataTable.isDataTable("#contacts_table")){
-        return;
-        }
-        $('#contacts_table').DataTable({
-            language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search..."
-            },
-            ajax: {
-                url: "{% url 'client_accounts:contacts' %}",
-                dataSrc: ""
-            },
-            columns: [{
-                    "data": "client_account",
-                    "render": function ( data, type, full, meta ) {
-                                return '<a>' + data.name + '( ' + data.uid + ' )' + '</a>';}
-                },
-                {
-                    "data": "user",
-                    "render": function ( data, type, full, meta ) {
-                                return '<a>' + data.first_name + ' ' + data.last_name + '</a>';}
-                },
-                {
-                    "data": "designation"
-                }
-            ]
-        });
-        $(".dataTables_filter label").addClass("ui input");
-
-    }
-
     function legal_table() {
         if ($.fn.dataTable.isDataTable("#legal_table")){
         return;
@@ -282,9 +209,6 @@ $(document).ready(function() {
     if (tab_name == 'clients_table'){
     clients_table()
     }
-    else if (tab_name == 'contacts_table'){
-    contacts_table()
-    }
     else if (tab_name == 'legal_table'){
     legal_table()
     }
@@ -298,11 +222,6 @@ $(document).ready(function() {
     $('#add_client_button').click(function(e) {
         window.open('{% url 'admin:client_accounts_clientaccount_add' %}', '_blank');
         <!--$('#add_client_modal.ui.modal').modal('show');-->
-    });
-
-    $('#add_contact_button').click(function(e) {
-        window.open('{% url 'admin:client_accounts_contact_add' %}', '_blank');
-        <!--$('#add_contact_modal.ui.modal').modal('show');-->
     });
         $('#add_legal_entity_button').click(function(e) {
         window.open('{% url 'admin:client_accounts_legalentity_add' %}', '_blank');
