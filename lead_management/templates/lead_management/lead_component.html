@@ -35,7 +35,8 @@
 
                     <h4 class="ui dividing header">Legal details</h4>
                     <div class="row">
-                        <a href="{{client_account.legal_account.admin_change_url}}">{{client_account.legal_account.legal_name}}</a>
+                        <a href="{% url 'client_accounts:legal_entity' client_account.legal_account.uid %}">
+                            {{client_account.legal_account.legal_name}}</a>
                     </div>
 
                     <div class="row">Gstin: {{client_account.legal_account.gstin}}</div>
