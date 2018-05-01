@@ -12,7 +12,7 @@ class LeadsView(BaseAPI):
     def get(self, request, *args, **kwargs):
         stage = request.query_params.get('stage')
         leads = Lead.objects.filter(created_by=request.user)
-        if stage == Lead.Stage.CLOSED:
+        if stage == 'closed':
             leads = leads.exclude(active=True)
         elif stage:
             leads = leads.filter(stage=stage)

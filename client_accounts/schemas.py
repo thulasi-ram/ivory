@@ -1,27 +1,8 @@
 from django.urls import reverse
 from marshmallow import Schema, fields
 
-
-class UserProfileSchema(Schema):
-    phone = fields.String(required=False)
-    linkedin_url = fields.String(required=False)
-
-
-class UserSchema(Schema):
-    first_name = fields.String(required=True)
-    last_name = fields.String(required=True)
-    email = fields.Email(required=True)
-    profile = fields.Nested(UserProfileSchema)
-
-
-class AddressSchema(Schema):
-    line1 = fields.String(required=True)
-    line2 = fields.String(required=True)
-    city = fields.String(required=True)
-    state = fields.String(required=True)
-    country = fields.String(required=True)
-    pincode = fields.String(required=True)
-    address_type = fields.String(required=True)
+from common.schemas import AddressSchema
+from user_profile.schemas import UserSchema
 
 
 class LegalEntitySchema(Schema):
@@ -61,10 +42,3 @@ class ClientAccountSchema(Schema):
     def get_addresses(self, obj, **kwargs):
         address_data, errors = ClientAddressSchema(many=True).dump(obj.addresses.all())
         return address_data
-
-
-class ContactSchema(Schema):
-    client_account = fields.Nested(ClientAccountSchema)
-    user = fields.Nested(UserSchema)
-    designation = fields.String(required=True)
-    notes = fields.String(required=True)
