@@ -13,3 +13,10 @@ class Profile(TimeStampedModel):
     linkedin_url = models.URLField(default='', blank=True)
     facebook_url = models.URLField(default='', blank=True)
     phone = models.CharField(max_length=15, default='', blank=True)
+    alternate_phone = models.CharField(max_length=15, default='', blank=True)
+    alternate_email = models.EmailField(max_length=200, default='', blank=True)
+    gender = models.CharField(max_length=15, default='', blank=True)
+
+
+class Salutation(TimeStampedModel):
+    title = models.CharField(max_length=100)

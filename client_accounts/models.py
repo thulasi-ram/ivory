@@ -1,5 +1,3 @@
-import enum
-
 from django.db import models
 from django.utils.functional import cached_property
 from djutil.models import TimeStampedModel
@@ -59,7 +57,6 @@ class ClientAccount(TimeStampedModel):
 
 
 class ClientAccountAddresses(TimeStampedModel):
-
     class AddressType:
         CONTACT = 'contact'
         BILLING = 'billing'
@@ -70,13 +67,3 @@ class ClientAccountAddresses(TimeStampedModel):
     address = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
     client_account = models.ForeignKey(ClientAccount, null=True, on_delete=models.CASCADE, related_name='addresses')
     address_type = models.CharField(max_length=20, blank=True, default='', choices=AddressType.CHOICES)
-
-
-class Contact(TimeStampedModel):
-    client_account = models.ForeignKey(ClientAccount, null=True, on_delete=models.SET_NULL)
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, default=get_current_user)
-    designation = models.CharField(max_length=100)
-    notes = models.TextField()
-
-    def __str__(self):
-        return '{c} ({u} - {d})'.format(c=self.client_account.name, u=self.user, d=self.designation)

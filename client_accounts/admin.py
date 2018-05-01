@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, ModelChoiceField, BaseInlineFormSet
 
-from client_accounts.models import LegalEntity, ClientAccount, Contact, ClientAccountAddresses
+from client_accounts.models import LegalEntity, ClientAccount, ClientAccountAddresses
 from common.models import Address
 from user_profile.models import User
 
@@ -79,28 +79,5 @@ class LegalEntityAdmin(admin.ModelAdmin):
     list_display = ['uid', 'legal_name', 'company_email', 'company_phone', 'gstin']
 
 
-class ContactForm(ModelForm):
-    client_account = ModelChoiceField(
-        queryset=ClientAccount.objects.all(),
-        widget=autocomplete.ModelSelect2(url='client_accounts:client-account-autocomplete'))
-    user = ModelChoiceField(
-        queryset=User.objects.all(),
-        widget=autocomplete.ModelSelect2(url='user_profile:user-autocomplete'))
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    class Meta:
-        model = Contact
-        fields = ('__all__')
-
-
-class ContactAdmin(admin.ModelAdmin):
-    form = ContactForm
-    search_fields = ['client_account__uid', 'client_account__name', 'user__name']
-    list_display = ['client_account', 'user', 'designation']
-
-
 admin.site.register(LegalEntity, LegalEntityAdmin)
 admin.site.register(ClientAccount, ClientAccountAdmin)
-admin.site.register(Contact, ContactAdmin)

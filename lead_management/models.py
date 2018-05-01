@@ -1,11 +1,18 @@
 from django.db import models
-# Create your models here.
 from djutil.models import TimeStampedModel
 
-from client_accounts.models import Contact
+from client_accounts.models import ClientAccount
 from common.middlewares.current_user import get_current_user
 from common.utils import make_meanigful_id
 from user_profile.models import User
+
+
+class Designation(TimeStampedModel):
+    title = models.CharField(max_length=100)
+
+
+class LeadStage(TimeStampedModel):
+    title = models.CharField(max_length=100)
 
 
 class Lead(TimeStampedModel):
@@ -20,11 +27,16 @@ class Lead(TimeStampedModel):
         CHOICES = ((x, x) for x in [IDENTIFY, PROSPECT, SUPPORTER, ENQUIRY, BUSINESS, CLOSED])
 
     uid = models.CharField(max_length=20, editable=False, unique=True)
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-    stage = models.CharField(max_length=20, choices=Stage.CHOICES)
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL,
-                                   related_name='lead_created_by',
+    client_account = models.ForeignKey(ClientAccount, on_delete=models.CASCADE)
+    contact = models.ForeignKey(User, on_delete=models.CASCADE, default=get_current_user, related_name='lead_contact')
+    designation = models.ForeignKey(Designation, null=True, on_delete=models.SET_NULL, default=get_current_user)
+    stage = models.ForeignKey(LeadStage, null=True, on_delete=models.SET_NULL)
+
+    # created / handled by
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='lead_created_by',
                                    default=get_current_user, editable=False)
+    handled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='lead_handled_by',
+                                   default=get_current_user)
 
     def save(self, *args, **kwargs):
         if not self.uid:

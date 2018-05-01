@@ -3,14 +3,18 @@ from django.contrib import admin
 # Register your models here.
 from django.forms import ModelForm, ModelChoiceField
 
-from client_accounts.models import Contact
+from client_accounts.models import ClientAccount
 from lead_management.models import Lead
+from user_profile.models import User
 
 
 class LeadForm(ModelForm):
+    client_account = ModelChoiceField(
+        queryset=ClientAccount.objects.all(),
+        widget=autocomplete.ModelSelect2(url='client_accounts:client-account-autocomplete'))
     contact = ModelChoiceField(
-        queryset=Contact.objects.all(),
-        widget=autocomplete.ModelSelect2(url='client_accounts:contact-autocomplete'))
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_profile:user-autocomplete'))
 
     class Meta:
         model = Lead
@@ -20,7 +24,7 @@ class LeadForm(ModelForm):
 class LeadAdmin(admin.ModelAdmin):
     form = LeadForm
     readonly_fields = ('uid',)
-    list_display = ('uid', 'contact', 'stage')
+    list_display = ('uid', 'client_account', 'contact', 'stage')
 
 
 admin.site.register(Lead, LeadAdmin)

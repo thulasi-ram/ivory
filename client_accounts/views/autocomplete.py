@@ -1,7 +1,7 @@
 from dal import autocomplete
 from django.db.models import Q
 
-from client_accounts.models import ClientAccount, LegalEntity, Contact
+from client_accounts.models import ClientAccount, LegalEntity
 
 
 class ClientAccountAutocomplete(autocomplete.Select2QuerySetView):
@@ -26,19 +26,6 @@ class LegalEntityAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(Q(name__istartswith=self.q) | Q(uid=self.q))
-
-        return qs
-
-
-class ContactAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return Contact.objects.none()
-
-        qs = Contact.objects.filter(client_account__handled_by=self.request.user)
-
-        if self.q:
-            qs = qs.filter(Q(client_account__name__istartswith=self.q) | Q(user__name__istartswith=self.q))
 
         return qs
 
