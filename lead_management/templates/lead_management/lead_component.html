@@ -12,8 +12,13 @@
                 </h1>
                 <div class="row">
                     <div class="row">
+                        {% if has_been_called %}
                         <a class="ui tag label teal">Called</a>
+                        {% endif %}
+
+                        {% if has_been_sent_profile %}
                         <a class="ui tag label teal">Profile sent</a>
+                        {% endif %}
 
 
                         <div class="ui right floated main menu">

@@ -16,3 +16,6 @@ class LeadSchema(Schema):
     contact = fields.Nested(UserSchema)
     designation = fields.String(required=True)
     notes = fields.String(required=True)
+    active = fields.Boolean()
+    has_been_called = fields.Boolean()
+    has_been_sent_profile = fields.Boolean()

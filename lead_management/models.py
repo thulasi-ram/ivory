@@ -42,6 +42,9 @@ class Lead(TimeStampedModel):
     active = models.BooleanField(default=True)
     notes = models.TextField(default='', blank=True)
 
+    has_been_called = models.BooleanField(default=False)
+    has_been_sent_profile = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         if not self.uid:
             self.uid = make_meanigful_id('', length=10)
