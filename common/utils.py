@@ -14,7 +14,7 @@ def cheap_hash(string, length=6):
 
 
 def meaningful_shorten(string, length=4):
-    _consonant = ''.join([l for l in string.lower() if l not in 'aeiou'])
+    _consonant = ''.join([l for l in string.lower() if l.isalpha() and l not in 'aeiou'])
     if length > len(_consonant):
         rand_str = get_random_string(length=length - len(_consonant))
         _consonant = '{c}{r}'.format(c=_consonant, r=rand_str)

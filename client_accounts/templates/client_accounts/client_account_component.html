@@ -4,10 +4,8 @@
             <div class="ui centered segment">
                 <h1 class="ui header">
                     <i class="building icon"></i>
-                    <div class="content">
-                        <a href="{% url 'client_accounts:client' client_account.uid %}">{{client_account.name}}
-                            <h5>{{client_account.uid}}</h5>
-                        </a>
+                    <div class="content">{{client_account.name}}
+                    <h5>{{client_account.uid}}</h5>
                     </div>
                 </h1>
                 <div class="row">
@@ -45,11 +43,25 @@
                 <div class="ui hidden divider"></div>
 
                 <div class="row">
-                    <div class="ui segment"> Notes: {{notes}}
+                    <div class="ui form">
+                        <h4 class="ui dividing header">Notes</h4>
+
+                        <div class="disabled field">
+                            <label></label>
+                            <textarea rows="2">{{notes}}</textarea>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="ui hidden divider"></div>
+
+                <h4 class="ui dividing header">Addresses</h4>
+                <div class="ui three stackable cards">
+                    {% for address in client_account.addresses %}
+                    {% include 'address_component.html' with address=address %}
+                    {% endfor %}
+                </div>
 
 
             </div>

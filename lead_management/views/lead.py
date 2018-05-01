@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from common.auth import CsrfExemptSessionAuthentication
 from common.views import BaseAPI
-from lead_management.models import Lead
+from lead_management.models import Lead, LeadStage
 from lead_management.schemas import LeadSchema
 
 
@@ -25,8 +25,9 @@ class LeadView(BaseAPI):
 
     def put(self, request, *args, **kwargs):
         lead_id = kwargs.get('lead_id')
-        stage = request.data.get('stage').replace('_', '')
+        stage_id = request.data.get('stage')
         lead = Lead.objects.get(uid=lead_id)
+        stage = LeadStage.objects.get(uid=stage_id)
         lead.stage = stage
         lead.save()
         return Response(data={}, status=status.HTTP_200_OK)

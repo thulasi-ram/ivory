@@ -31,31 +31,14 @@ $(document).ready(function () {
         },
         addItemButton: false,
         boards: [
+
+            {% for stage in lead_stages %}
             {
-                "id": "_identify",
-                "title": "Identify",
+                "id": "{{stage.uid}}",
+                "title": "{{stage.title}}",
                 "item": []
             },
-            {
-                "id": "_prospect",
-                "title": "Prospects",
-                "item": []
-            },
-            {
-                "id": "_supporter",
-                "title": "Supporters",
-                "item": []
-            },
-            {
-                "id": "_enquiry",
-                "title": "Enquiry",
-                "item": []
-            },
-            {
-                "id": "_business",
-                "title": "Business",
-                "item": []
-            }
+            {% endfor %}
         ]
     });
 
@@ -107,7 +90,7 @@ $(document).ready(function () {
         url: "{% url 'lead_management:leads' %}", success: function (leads) {
             console.log(leads);
             leads.map(function (lead) {
-                KanbanTest.addElement('_' + lead.stage, {
+                KanbanTest.addElement(lead.stage.uid, {
                     "title": lead.uid,
                 })
             });
