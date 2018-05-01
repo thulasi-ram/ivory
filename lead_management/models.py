@@ -28,16 +28,6 @@ class LeadStage(TimeStampedModel):
 
 
 class Lead(TimeStampedModel):
-    class Stage:
-        IDENTIFY = 'identify'
-        PROSPECT = 'prospect'
-        SUPPORTER = 'supporter'
-        ENQUIRY = 'enquiry'
-        BUSINESS = 'business'
-        CLOSED = 'closed'
-
-        CHOICES = ((x, x) for x in [IDENTIFY, PROSPECT, SUPPORTER, ENQUIRY, BUSINESS, CLOSED])
-
     uid = models.CharField(max_length=20, editable=False, unique=True)
     client_account = models.ForeignKey(ClientAccount, on_delete=models.CASCADE)
     contact = models.ForeignKey(User, on_delete=models.CASCADE, default=get_current_user, related_name='lead_contact')
