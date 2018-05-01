@@ -51,7 +51,7 @@
                 <div class="ui hidden divider"></div>
 
                 <div class="row">
-                    <div class="ui segment"> Notes: {{lead.notes}}
+                    <div class="ui basic segment"> Notes: {{lead.notes}}
                     </div>
                 </div>
 
@@ -65,23 +65,27 @@
         </div>
     </div>
     <div class="row">
-        <div class="ui feed">
-            {% load activity_tags %}
+        <div class="sixteen wide column">
+            <div class="ui centered segment">
+                <div class="ui feed">
+                    <h4 class="ui dividing header">Recent actions</h4>
 
-            {% for item in feed %}
-            <div class="event">
-                <div class="content">
-                    <div class="summary">
-                        {{ item }}
-                        <div class="date">
-                            3 days ago
+                    {% for item in feed %}
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                {{ item.title }}
+                                <div class="date">
+                                    {{item.timesince}}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
+
+
                 </div>
             </div>
-            {% endfor %}
-
-
         </div>
     </div>
 

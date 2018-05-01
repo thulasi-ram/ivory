@@ -15,10 +15,10 @@ class LeadActionView(BaseAPI):
         action_type = request.data.get('action_type')
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
-        if action_type == 'call':
+        if action_type == 'log_a_call':
             action.send(request.user, verb='called', target=lead, action_object=lead.contact)
         elif action_type == 'send_profile':
             action.send(request.user, verb='sent profile', target=lead)
-        elif action_type == 'remind':
+        elif action_type == 'add_a_reminder':
             action.send(request.user, verb='added a reminder', target=lead)
         return Response(data={}, status=status.HTTP_200_OK)

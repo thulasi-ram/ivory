@@ -17,14 +17,40 @@ $('#log_a_call').on('click', function() {
         $.ajax({
             url: window.location.pathname + '/action',
             type: 'POST',
-            data: {"action_type": "call"},
+            data: {"action_type": "log_a_call"},
             headers: {},
             success: function (result) {
                 data = result;
             }
         });
 
-        })
+        });
+
+$('#send_profile').on('click', function() {
+        $.ajax({
+            url: window.location.pathname + '/action',
+            type: 'POST',
+            data: {"action_type": "send_profile"},
+            headers: {},
+            success: function (result) {
+                data = result;
+            }
+        });
+
+        });
+
+$('#add_a_reminder').on('click', function() {
+        $.ajax({
+            url: window.location.pathname + '/action',
+            type: 'POST',
+            data: {"action_type": "add_a_reminder"},
+            headers: {},
+            success: function (result) {
+                data = result;
+            }
+        });
+
+        });
 
 });
 

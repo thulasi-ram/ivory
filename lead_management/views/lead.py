@@ -9,6 +9,28 @@ from lead_management.models import Lead, LeadStage
 from lead_management.schemas import LeadSchema
 
 
+def get_json_feed(feed):
+    from django.utils.translation import ugettext as _
+
+    ctx = {
+        'actor': feed.actor,
+        'verb': feed.verb,
+        'action_object': feed.action_object,
+        'target': feed.target,
+    }
+
+    if feed.target:
+        if feed.action_object:
+            _description = _('%(actor)s %(verb)s %(action_object)s on %(target)s')
+        else:
+            _description = _('%(actor)s %(verb)s %(target)s')
+    elif feed.action_object:
+        _description = _('%(actor)s %(verb)s %(action_object)s')
+    else:
+        _description = _('%(actor)s %(verb)s')
+    return {'title': _description % ctx, 'timesince': feed.timesince()}
+
+
 class LeadView(BaseAPI):
     template_name = 'lead_management/lead.html'
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -17,7 +39,7 @@ class LeadView(BaseAPI):
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
         lead_data, errors = LeadSchema().dump(lead)
-        feed = target_stream(lead)
+        feed = [get_json_feed(item) for item in target_stream(lead)]
         return Response(data={'lead': lead_data, 'feed': feed}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
