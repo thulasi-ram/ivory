@@ -52,3 +52,6 @@ class Lead(TimeStampedModel):
 
     class Meta:
         unique_together = ("client_account", "contact", "handled_by")
+
+    def __str__(self):
+        return 'Lead({i})'.format(u=self.contact, c=self.client_account, i=self.uid)

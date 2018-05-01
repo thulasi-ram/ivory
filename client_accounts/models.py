@@ -32,7 +32,7 @@ class LegalEntity(TimeStampedModel):
         return '{n} {t}'.format(n=self.name, t=self.business_type)
 
     def __str__(self):
-        return '{n} ({i})'.format(n=self.legal_name, i=self.uid)
+        return self.legal_name
 
     class Meta:
         verbose_name = 'Legal Entity'
@@ -55,7 +55,7 @@ class ClientAccount(TimeStampedModel):
     notes = models.TextField(default='', blank=True)
 
     def __str__(self):
-        return '{n} ({i}) ({u})'.format(n=self.name, u=self.handled_by, i=self.uid)
+        return self.name
 
     def save(self, *args, **kwargs):
         if not self.uid:

@@ -5,31 +5,31 @@
                 <h1 class="ui header">
                     <i class="building icon"></i>
                     <div class="content">
-                        <a href="{% url 'client_accounts:client' client_account.uid %}">{{client_account.name}}
-                            <h5>{{client_account.uid}}</h5>
+                        <a href="{% url 'client_accounts:client' client_account.uid %}">{{lead.client_account.name}}
+                            <h5>{{lead.client_account.uid}}</h5>
                         </a>
                     </div>
                 </h1>
                 <div class="row">
                     <div class="row">
-                        {% if has_been_called %}
+                        {% if lead.has_been_called %}
                         <a class="ui tag label teal">Called</a>
                         {% endif %}
 
-                        {% if has_been_sent_profile %}
+                        {% if lead.has_been_sent_profile %}
                         <a class="ui tag label teal">Profile sent</a>
                         {% endif %}
 
 
                         <div class="ui right floated main menu">
                             <div class="ui basic buttons">
-                                <a class="ui icon button" data-tooltip="Log a call">
+                                <a id="log_a_call" class="ui icon button" data-tooltip="Log a call">
                                     <i class="phone icon"></i>
                                 </a>
-                                <a class="ui icon button" data-tooltip="Send Profile">
+                                <a id="send_profile" class="ui icon button" data-tooltip="Send Profile">
                                     <i class="inbox icon"></i>
                                 </a>
-                                <a class="ui icon button" data-tooltip="Set a reminder">
+                                <a id="add_a_reminder" class="ui icon button" data-tooltip="Set a reminder">
                                     <i class="calendar alternate outline icon"></i>
                                 </a>
                             </div>
@@ -41,17 +41,17 @@
                     <h4 class="ui dividing header">Legal details</h4>
                     <div class="row">
                         <a href="{% url 'client_accounts:legal_entity' client_account.legal_account.uid %}">
-                            {{client_account.legal_account.legal_name}}</a>
+                            {{lead.client_account.legal_account.legal_name}}</a>
                     </div>
 
-                    <div class="row">Gstin: {{client_account.legal_account.gstin}}</div>
+                    <div class="row">Gstin: {{lead.client_account.legal_account.gstin}}</div>
 
                 </div>
 
                 <div class="ui hidden divider"></div>
 
                 <div class="row">
-                    <div class="ui segment"> Notes: {{notes}}
+                    <div class="ui segment"> Notes: {{lead.notes}}
                     </div>
                 </div>
 
@@ -61,10 +61,28 @@
             </div>
         </div>
         <div class="four wide column">
-            {% include 'user_profile/user_component.html' with user=contact %}
+            {% include 'user_profile/user_component.html' with user=lead.contact %}
         </div>
     </div>
     <div class="row">
+        <div class="ui feed">
+            {% load activity_tags %}
+
+            {% for item in feed %}
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                        {{ item }}
+                        <div class="date">
+                            3 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
     </div>
 
 </div>

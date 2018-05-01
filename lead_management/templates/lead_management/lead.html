@@ -7,3 +7,26 @@
 {% include 'lead_management/lead_component.html' %}
 
 {% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function() {
+
+$('#log_a_call').on('click', function() {
+        $.ajax({
+            url: window.location.pathname + '/action',
+            type: 'POST',
+            data: {"action_type": "call"},
+            headers: {},
+            success: function (result) {
+                data = result;
+            }
+        });
+
+        })
+
+});
+
+</script>
+{% endblock %}

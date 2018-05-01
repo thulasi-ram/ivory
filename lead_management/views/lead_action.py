@@ -1,23 +1,24 @@
 # Create your views here.
+from actstream import action
 from rest_framework import status
 from rest_framework.response import Response
 
 from common.auth import CsrfExemptSessionAuthentication
 from common.views import BaseAPI
-from lead_management.models import Lead, LeadStage
-from lead_management.schemas import LeadSchema
+from lead_management.models import Lead
 
 
 class LeadActionView(BaseAPI):
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        action_type = request.data.get('action_type')
         lead_id = kwargs.get('lead_id')
         lead = Lead.objects.get(uid=lead_id)
-        lead_data, errors = LeadSchema().dump(lead)
-        return Response(data=lead_data, status=status.HTTP_200_OK)
-
-    def post(self, request, *args, **kwargs):
-        lead_schema = LeadSchema().load(request.data)
-        Lead.objects.create(**lead_schema)
-        return Response(data={'request': request}, status=status.HTTP_201_CREATED)
+        if action_type == 'call':
+            action.send(request.user, verb='called', target=lead, action_object=lead.contact)
+        elif action_type == 'send_profile':
+            action.send(request.user, verb='sent profile', target=lead)
+        elif action_type == 'remind':
+            action.send(request.user, verb='added a reminder', target=lead)
+        return Response(data={}, status=status.HTTP_200_OK)

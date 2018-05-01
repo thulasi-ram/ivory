@@ -7,7 +7,7 @@ from lead_management.views.leads import LeadsView
 
 urlpatterns = [
     url(r'^$', LeadManagementLanding.as_view(), name='landing'),
-    url(r'^lead/(?P<lead_id>.*)/action/', LeadActionView.as_view(), name='lead-action'),
-    url(r'^lead/(?P<lead_id>.*)$', LeadView.as_view(), name='lead'),
-    url(r'^leads/', LeadsView.as_view(), name='leads'),
+    url(r'^lead/(?P<lead_id>.*)/action/?', LeadActionView.as_view(), name='lead-action'),
+    url(r'^lead/(?P<lead_id>.*)/?$', LeadView.as_view(), name='lead'),
+    url(r'^leads/?', LeadsView.as_view(), name='leads'),
 ]
