@@ -29,4 +29,5 @@ urlpatterns = [url(r'^$', Landing.as_view(), name='landing'),
                url(r'^lead_management/', include(('lead_management.urls', 'lead_management'))),
                url(r'^user_profile/', include(('user_profile.urls', 'user_profile'))),
                url('^activity/', include('actstream.urls')),
+               url('^schedule/', include('schedule.urls', 'schedule')),
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

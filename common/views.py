@@ -19,7 +19,7 @@ class BaseAPI(APIView):
 
 
 class Landing(BaseAPI):
-    template_name = "landing.html"
+    template_name = "ivory/landing.html"
 
     def get(self, request, *args, **kwargs):
         return Response(data={'request': request}, template_name=self.template_name, status=status.HTTP_200_OK)
