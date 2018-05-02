@@ -18,16 +18,17 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from common.views import Landing
+from common.views import Landing, Calendar
 
 # from django.urls import path, include
 
 urlpatterns = [url(r'^$', Landing.as_view(), name='landing'),
+               url(r'^calendar/?$', Calendar.as_view(), name='calendar'),
                url(r'^admin/', admin.site.urls),
                url(r'^accounts/', include('allauth.urls')),
                url(r'^client_accounts/', include(('client_accounts.urls', 'client_accounts'))),
                url(r'^lead_management/', include(('lead_management.urls', 'lead_management'))),
                url(r'^user_profile/', include(('user_profile.urls', 'user_profile'))),
                url('^activity/', include('actstream.urls')),
-               url('^schedule/', include('schedule.urls', 'schedule')),
+               url('^schedule/', include('schedule.urls')),
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

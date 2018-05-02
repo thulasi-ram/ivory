@@ -23,3 +23,9 @@ class Landing(BaseAPI):
 
     def get(self, request, *args, **kwargs):
         return Response(data={'request': request}, template_name=self.template_name, status=status.HTTP_200_OK)
+
+class Calendar(BaseAPI):
+    template_name = "ivory/calendar.html"
+
+    def get(self, request, *args, **kwargs):
+        return Response(data={'request': request}, template_name=self.template_name, status=status.HTTP_200_OK)
